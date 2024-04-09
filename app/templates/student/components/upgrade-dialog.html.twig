@@ -1,0 +1,37 @@
+{% trans_default_domain 'student' %}
+
+<div class="student-upgrade-dialog visible"
+     data-controller="avatar-upgrade-dialog"
+     data-avatar-upgrade-dialog-endpoint-value="{{ path('student_upgrade') }}"
+     data-avatar-upgrade-dialog-upgrade-value="{{ upgrade }}"
+     data-avatar-upgrade-dialog-upgradesi18n-value="{{ upgradesi18n }}"
+     data-avatar-upgrade-dialog-avatar-outlet=".avatar">
+    <div class="student-upgrade-dialog-inner">
+        <div class="student-upgrade-dialog-avatar">
+            {{ avatar(student.Avatar, "avatar-preview") }}
+        </div>
+        <div class="student-upgrade-dialog-choice"
+             data-avatar-upgrade-dialog-target="choicePanel">
+            <div class="student-upgrade-dialog-choice-inner">
+                <div class="student-upgrade-dialog-header">
+                    <div class="student-upgrade-dialog-title">{{ 'student.upgrade.title' | trans }}</div>
+                    <div class="student-upgrade-dialog-subtitle">{{ 'student.upgrade.subtitle' | trans }}</div>
+                </div>
+                <div class="student-upgrade-dialog-choices" data-avatar-upgrade-dialog-target="choices">
+                </div>
+                <div class="student-upgrade-dialog-error">
+                    {{ 'student.upgrade.error' | trans }}
+                </div>
+                <div class="student-upgrade-dialog-controls">
+                    <input type="hidden" name="token"
+                           data-avatar-upgrade-dialog-target="token"
+                           value="{{ csrf_token('upgrade-avatar') }}"/>
+                    <button class="button button-positive"
+                            data-avatar-upgrade-dialog-target="confirm"
+                            data-action="avatar-upgrade-dialog#validate">{{ 'student.upgrade.confirm' | trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

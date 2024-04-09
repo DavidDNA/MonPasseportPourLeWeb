@@ -1,0 +1,11 @@
+@media print {
+  .student-passport {
+    margin: 0;
+    padding: 0 1.5cm;
+    width: 210mm;
+  }
+
+  .passport-nickname-indication {
+    display: none;
+  }
+}

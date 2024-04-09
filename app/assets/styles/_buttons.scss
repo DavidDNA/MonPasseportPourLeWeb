@@ -1,0 +1,61 @@
+@mixin button-color($color, $text) {
+  background: $color;
+  border-color: $color;
+  color: $text;
+
+  &:hover:not(:disabled) {
+    background: theme('colors.p2');
+    border-color: $color !important;
+  }
+
+  &:disabled {
+    opacity: .5;
+  }
+}
+
+.button {
+  @apply border-2 py-0.5 px-2 bg-p3 text-p2;
+  @include button-color(theme('colors.p3'), theme('colors.p2'));
+  font-weight: normal;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:not(:disabled) {
+    &:hover {
+      @apply border-slate-800 text-black;
+    }
+  }
+}
+
+a.button {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button-clean {
+  border: 0;
+  background: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+button.loading {
+  @apply opacity-50;
+  pointer-events: none;
+}
+
+.button-positive {
+  @include button-color(theme('colors.p5'), theme('colors.p1'));
+}
+
+.button-negative {
+  @include button-color(theme('colors.p6'), theme('colors.p2'));
+}
+
+.button-warning {
+  @include button-color(theme('colors.p9'), theme('colors.p2'));
+}

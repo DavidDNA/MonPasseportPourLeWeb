@@ -1,0 +1,40 @@
+{% trans_default_domain 'passport' %}
+
+<div class="passport">
+    <header>
+        <img src="{{ asset('build/images/mpw.svg') }}"/>
+        <div>{{ 'passport.title' | trans | raw }}</div>
+    </header>
+
+    <div class="passport-main">
+        <div class="passport-identity">
+            <div class="passport-avatar">
+                {{ avatar(student.Avatar) }}
+            </div>
+            <label class="passport-delivered-to" for="nickname">
+                {{ 'passport.delivered_to' | trans }}
+            </label>
+            <input id="nickname" type="text" class="passport-nickname" maxlength="18"/>
+            <div class="tooltip tooltip-top passport-nickname-indication">
+                {{ 'passport.nickname_indication' | trans }}
+            </div>
+        </div>
+        <div class="passport-text">
+            {{ 'passport.intro' | trans }}
+        </div>
+        <div class="passport-content">
+            <ul>
+                {% for progression in student.getProgression() %}
+                    {% set session = progression.getSession() %}
+                    <li class="passport-session">
+                        <span class="status status-icon status-{{ progression.getStatus()|lower }} mr-2"></span>
+                        <span>{{ session.getTitle() }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="passport-text passport-grant">
+        {{ 'passport.purpose.start' | trans }} {{ (student.getClassroom().getYearGroup().getName() ~ '.purpose') | trans({}, 'yeargroup') }}
+    </div>
+</div>

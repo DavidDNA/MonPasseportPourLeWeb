@@ -1,0 +1,178 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% block content %}
+    {% include 'teacher/components/confirm-update-dialog.html.twig' with {id: 'confirm-update-dialog'} %}
+    {% include 'teacher/components/confirm-remove-session-dialog.html.twig' with {id: 'confirm-remove-session-dialog'} %}
+
+    <div class="view-classroom-detail">
+        <h1>
+            <span>{{ 'classroom.detail.title' | trans({'%code%': classroom.getCode()}) }}</span>
+            <span>
+                <span class="view-classroom-detail-yeargroup">{{ classroom.getYearGroup().getName() | trans({}, 'yeargroup') }}</span>
+                <span class="view-classroom-detail-url">
+                    <a href="{{ path('student_login_with_classroom', {code: classroom.getCode()}) }}" target="_blank">
+                        {{ absolute_url(path('student_login_with_classroom', {code: classroom.getCode()})) }}</a>
+                </span>
+            </span>
+        </h1>
+        <ul class="view-classroom-detail-actions">
+            <li>
+                <button class="button"
+                        data-controller="dialog-control"
+                        data-action="dialog-control#open"
+                        data-dialog-control-url-param="{{ path('teacher_classroom_sessions', {id: classroom.getId()}) }}">
+                    {{ 'classroom.detail.menu.sessions' | trans }}
+                </button>
+            </li>
+            <li>
+                <button class="button"
+                        data-controller="print-new-window"
+                        data-action="print-new-window#print"
+                        data-print-new-window-url-param="{{ path('teacher_classroom_portfolio', {id: classroom.getId()}) }}">
+                    {{ 'classroom.detail.menu.portfolio' | trans }}
+                </button>
+            </li>
+            <li>
+                <a class="button"
+                   href="{{ path('teacher_classroom_print', {id: classroom.getId()}) }}">{{ 'classroom.detail.menu.print' | trans }}</a>
+            </li>
+            <li>
+                {{ form_start(addStudentForm) }}
+                <button data-controller="btn-loading"
+                        type="submit"
+                        class="button button-positive">{{ 'classroom.detail.menu.add' | trans }}</button>
+                {{ form_end(addStudentForm) }}
+            </li>
+            <li>
+                {{ form_start(deleteForm) }}
+                <button type="submit"
+                        class="button button-negative"
+                        data-controller="confirm-dialog-control"
+                        data-confirm-dialog-control-id-param="confirm-dialog"
+                        data-action="confirm-dialog-control#open">{{ 'classroom.detail.menu.delete' | trans }}</button>
+                {{ form_end(deleteForm) }}
+            </li>
+        </ul>
+
+        {% include 'teacher/components/flashes.html.twig' %}
+
+        {% if classroom.getStudents().count() > 0 and classroom.getSessions().count() > 0 %}
+            <div data-controller="classroom-status-forms" class="shadow-md">
+                <div class="view-classroom-detail-table-wrap scrollbar">
+                    <table class="view-classroom-detail-table">
+                        <colgroup>
+                            <col style="width: 20%">
+                            {% for session in classroom.getSessions() %}
+                                <col style="width:{{ 80/classroom.getSessions().count()|number_format }}%;">
+                            {% endfor %}
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th><h2 class="text-left mb-0">{{ 'classroom.detail.progression.title' | trans() }}</h2>
+                            </th>
+                            {% for session in classroom.getSessions() %}
+                                <th class="view-classroom-detail-heading">
+                                    <button data-controller="dialog-control"
+                                            data-action="dialog-control#open"
+                                            data-dialog-control-url-param="{{ path('session_detail', {id: session.getSession().getId()}) }}"
+                                            title="{{ session.getSession().getName() }}">
+                                        {{ 'classroom.detail.session' | trans }} {{ loop.index }}
+                                    </button>
+
+                                    <div class="view-classroom-detail-heading-remove-session">
+                                        <form name="classroom-remove-session"
+                                              method="post"
+                                              action="{{ path('teacher_classroom_remove_session', { id: classroom.getId(), session: session.getId() }) }}">
+                                            <input type="hidden"
+                                                   name="token"
+                                                   value="{{ csrf_token('remove-session') }}"/>
+                                            <button class="button button-clean"
+                                                    type="submit"
+                                                    data-controller="confirm-dialog-control"
+                                                    data-confirm-dialog-control-id-param="confirm-remove-session-dialog"
+                                                    data-confirm-dialog-autoclose-param="true"
+                                                    data-action="confirm-dialog-control#open">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </th>
+                            {% endfor %}
+                        </tr>
+                        <tr class="border-b border-slate-200">
+                            <td class="italic">{{ 'classroom.detail.progression.label' | trans }}</td>
+                            {% for session in classroom.getSessions() %}
+                                <td>
+                                    <div class="flex items-center justify-center space-x-1 h-6">
+                                        {% include 'classroom/bulk-upgrade-form.html.twig' with {status: 'todo'} %}
+                                        {% include 'classroom/bulk-upgrade-form.html.twig' with {status: 'in_progress'} %}
+                                        {% include 'classroom/bulk-upgrade-form.html.twig' with {status: 'done'} %}
+                                    </div>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    </table>
+                    <table class="view-classroom-detail-table">
+                        <colgroup>
+                            <col style="width: 20%">
+                            {% for session in classroom.getSessions() %}
+                                <col style="width:{{ 80/classroom.getSessions().count()|number_format }}%;">
+                            {% endfor %}
+                        </colgroup>
+                        <tbody>
+                        {% for student in classroom.getStudents() %}
+                            <tr class="odd:bg-slate-100 student-{{ student.isEnabled() ? 'enabled' : 'disabled' }}">
+                                <td>
+                                    <button data-controller="dialog-control"
+                                            data-action="dialog-control#open"
+                                            data-dialog-control-url-param="{{ path('teacher_classroom_student_details', {id: classroom.getId(), student: student.getId()}) }}">
+                                        {{ 'classroom.detail.progression.student' | trans }} {{ loop.index }}
+                                    </button>
+                                    {% if student.hasPassport() %}
+                                        <a class="ml-2"
+                                           href="{{ path('teacher_classroom_student_passport', {id: classroom.getId(), student: student.getId()}) }}"
+                                           title="{{ 'classroom.detail.student.open_passport' | trans() }}"
+                                           target="_blank">
+                                            <i class="fa-solid fa-passport"></i>
+                                        </a>
+                                    {% endif %}
+                                </td>
+                                {% for progress in student.getProgression() %}
+                                    <td>
+                                        {% if student.isEnabled() %}
+                                            <form name="classroom-upgrade-progress"
+                                                  method="post"
+                                                  action="{{ path('teacher_classroom_upgrade_progression', { id: progress.getId() }) }}">
+                                                <input type="hidden"
+                                                       name="token"
+                                                       value="{{ csrf_token('upgrade-progression') }}"/>
+                                                <button id="progress-{{ progress.getId() }}"
+                                                        type="submit"
+                                                        class="status status-icon status-{{ progress.getStatus()|lower }}"></button>
+                                            </form>
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="view-classroom-detail-footer">
+                {% include 'teacher/components/feedbacks.html.twig' %}
+                <div class="view-classroom-detail-legend">
+                    {% set status = ['todo', 'in_progress', 'done'] %}
+                    <div>
+                        {% for s in status %}
+                            <div class="view-classroom-detail-legend-item">
+                                <div class="status status-icon status-{{ s }}"></div> {{ ('classroom.detail.status.' ~ s) | trans }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions d'utilisation{% endblock %}
+
+{% block body %}
+    <div class="teacher-login-view">
+        <div class="teacher-terms">
+            <div class="teacher-login-heading">
+                <img class="mb-2" src="{{ asset('build/images/mpw.svg') }}"/>
+                <h1>{{ 'teacher.terms.title' | trans }}</h1>
+            </div>
+
+            <div class="box mb-8">
+                <p>En acceptant les conditions générales d'utilisation, vous vous engagez à respecter tous les points
+                    mentionnés ci-dessous, édictés le 15 octobre 2023.</p>
+                <h2>Assise institutionnelle</h2>
+                <p>«Mon Passeport pour le Web» (ci-après «MPW») a été développé avec du financement public dans le cadre
+                    d'un financement de projet FNS. Le CRE/ATE de la HEP|PH FR en est propriétaire. Toute mention de
+                    l'application dans des travaux de développement ou scientifiques doit être faite comme suit:
+                    Tadlaoui, A., Alvarez, L., Çuko, K., Marguet, R., &amp; Cochard, B. (2023). Mon Passeport pour le
+                    Web (v1.0) [plateforme WEB]. www.mpweb.ch</p>
+                <p>Le développement et l'utilisation des données produites par MPW ainsi que toute modification de son
+                    contenu sont soumis au contrôle exclusif du CRE/ATE. Cette entité désigne un·e administrateurice qui
+                    a accès à l'ensemble des fonctionnalités.</p>
+                <h2>Acceptation des conditions</h2>
+                <p>En utilisant MPW, vous reconnaissez avoir lu, compris et accepté les présentes Conditions. Si vous
+                    accédez à MPW au nom d'une entité, vous déclarez avoir l'autorité nécessaire pour lier cette entité
+                    aux présentes Conditions.</p>
+                <h2>Services</h2>
+                <div><p>Les services de MPW sont:</p>
+                    <ul>
+                        <li>Créations de comptes pour l'enseignant·e;</li>
+                        <li>Génération d'accès pour les élèves;</li>
+                        <li>Mise à disposition de ressources pédagogiques en lien notamment avec le plan d'études
+                            «Éducation numérique»;
+                        </li>
+                        <li>Gestion de l'achèvement des activités par les élèves;</li>
+                        <li>Documentation d'un portfolio en lien avec les connaissances et compétences numériques des
+                            élèves.
+                        </li>
+                    </ul>
+                    <p>L'utilisation de MPW est gratuite.</p></div>
+                <h2>Public cible</h2>
+                <p>L'application MPW s'adresse à toute personne en charge du développement des compétences numériques
+                    d'apprenant·e·s. Pour la création d'un compte sur MPW, la majorité est exigée.</p>
+                <h2>Abus</h2>
+                <p>Chaque utilisateurice s'engage à respecter l'usage usuel de l'application selon le bon sens commun.
+                    Vous acceptez de ne pas perturber le fonctionnement de MPW. Vous acceptez de ne pas utiliser MPW à
+                    des fins illégales, diffamatoires, obscènes, offensantes, discriminatoires ou nuisibles. MPW
+                    s'inscrit dans une logique positive et poursuit un but formatif. En outre, l'usage de l'outil
+                    implique l'utilisation d'un langage approprié ou de ne pas abuser du contact auprès de
+                    l'administrateurice.</p>
+                <h2>Données personnelles et anonymisation</h2>
+                <p>Les données personnelles ne sont utilisées que dans le cadre de l'application ou de communications
+                    scientifiques avec une précaution sérieuse d'anonymisation des données le cas échéant. Elles ne sont
+                    jamais transmises à des tiers ou vendues à des fins publicitaires.</p>
+                <p>L'exportation de toutes les données de l'application (y compris les profils de chaque utilisateurice)
+                    est possible et ne peut être réalisée que par l'administrateurice.</p>
+                <h2>Droit à l'oubli</h2>
+                <p>Les utilisateurices peuvent réclamer le droit à l'oubli. Pour ce faire, ils contactent par écrit
+                    (voir adresse de contact dans l'application) l'administrateurice qui supprimera définitivement le
+                    compte et toutes les données stockées dans l'application les concernant. De plus, les données
+                    «élèves» sont automatiquement supprimées une fois par année, fin juillet.</p>
+                <h2>Responsabilité</h2>
+                <p>MPW est un service gratuit et ne garantit pas l'accès en tout temps à l'application, la pérennité de
+                    son service, ainsi que la préservation des données. En cas d'attaque malveillante, les
+                    utilisateurices sont informées dans les plus brefs délais.</p>
+                <h2>Renonciation</h2>
+                <p>Dans le cas où l'utilisateurice ne souhaite plus accepter les conditions générales, il peut à tout
+                    moment renoncer à son accord. Pour ce faire, il doit contacter l'administrateurice (voir adresse de
+                    contact dans l'application).</p>
+                <p>Cette renonciation implique de facto la perte d'accès à tous les services proposés par MPW.</p>
+                <h2>Non-respect des conditions générales</h2>
+                <p>En cas de non-respect des conditions générales de la part d'un·e utilisateurice, MPW se réserve le
+                    droit de bloquer son compte ou de le supprimer sans préavis.</p>
+                <h2>Mise à jour des conditions générales</h2>
+                <p>Par souci de protection des données et pour offrir les meilleurs services possibles, MPW se réserve
+                    le droit de modifier les présentes conditions générales d'utilisation. Lors d'une modification, les
+                    utilisateurices sont notifiées et peuvent les accepter ou décliner.</p>
+                <h2>Questions</h2>
+                <p>Pour toutes informations complémentaires concernant les conditions générales, vous pouvez prendre
+                    contact via le formulaire dédié.</p>
+                <h2>Localisation</h2>
+                <p>MPW étant un projet suisse, les données sont hébergées en Suisse et les éventuels litiges sont gérés
+                    par le droit suisse.</p>
+                <h2>Ressources libres</h2>
+                <p>MPW est au bénéfice d'une licence CC-BY. Le code sources est disponible ici:</p>
+                <h2>Contenus soumis par les utilisateurices, le cas échéant</h2>
+                <p>Les contenus proposés par les utilisateurices bénéficient de la licence CC0. Il est à la charge de la
+                    personne qui propose les contenus de garantir que ces derniers soient libres de droits.</p>
+            </div>
+
+            <div class="text-center">
+                <a href="{{ path('teacher_new') }}">{{ 'teacher.terms.back' | trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

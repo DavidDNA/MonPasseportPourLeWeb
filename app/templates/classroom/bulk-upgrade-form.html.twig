@@ -1,0 +1,12 @@
+<form name="classroom-upgrade-progress"
+      method="post"
+      action="{{ path('teacher_classroom_bulk_upgrade_progression', {id: classroom.getId(), session: session.getId()}) }}">
+    <input type="hidden" name="token"
+           value="{{ csrf_token('upgrade-progression') }}"/>
+    <input type="hidden" name="status" value="{{ status }}"/>
+    <button type="submit" class="status status-icon status-{{ status }}"
+            data-controller="confirm-dialog-control"
+            data-confirm-dialog-control-id-param="confirm-update-dialog"
+            data-action="confirm-dialog-control#open"
+            data-confirm-dialog-control-autoclose-param="true"></button>
+</form>

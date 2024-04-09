@@ -1,0 +1,12 @@
+.table {
+  @apply w-full shadow-lg;
+
+  > div {
+    @apply flex items-center p-4 odd:bg-slate-50 even:bg-white;
+
+    a {
+      @apply text-p3;
+      font-weight: 500;
+    }
+  }
+}

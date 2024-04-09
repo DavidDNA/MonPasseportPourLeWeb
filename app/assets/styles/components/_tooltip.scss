@@ -1,0 +1,29 @@
+@import "../mixin";
+
+.tooltip {
+  @apply bg-p9 text-white py-2 px-4 shadow-md;
+  font-weight: bold;
+  line-height: 1.15;
+  text-align: center;
+  z-index: 1;
+
+  &:after {
+    @apply bg-p9;
+    content: '';
+    display: block;
+    height: 20px;
+    width: 20px;
+    z-index: -1;
+  }
+}
+
+.tooltip-top:after {
+  @include absolute(0, null, null, 50%);
+  transform: rotate(45deg) translateX(-50%);
+}
+
+.tooltip-right:after {
+  @include absolute(50%, null, null, 100%);
+  transform: rotate(45deg) translate(-10px, -50%);
+  transform-origin: top left;
+}

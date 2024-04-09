@@ -1,0 +1,37 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+session:
+    resource:
+        path: ../src/Session/Controller/
+        namespace: App\Session\Controller
+    type: attribute
+
+teacher:
+    resource:
+        path: ../src/Teacher/Controller/
+        namespace: App\Teacher\Controller
+    type: attribute
+
+classroom:
+    resource:
+        path: ../src/Classroom/Controller/
+        namespace: App\Classroom\Controller
+    type: attribute
+
+student:
+    resource:
+        path: ../src/Student/Controller/
+        namespace: App\Student\Controller
+    type: attribute
+
+student_logout:
+    path: /student/logout
+    methods: GET
+
+app_logout:
+    path: /logout
+    methods: GET

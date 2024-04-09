@@ -1,0 +1,9 @@
+@import "../mixin";
+
+.avatar {
+  position: relative;
+
+  > div {
+    @include absolute;
+  }
+}

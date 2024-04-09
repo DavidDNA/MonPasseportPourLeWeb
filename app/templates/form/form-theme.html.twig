@@ -1,0 +1,73 @@
+{# form templates override
+    https://github.com/symfony/symfony/blob/bc5fea4e2190f00a207871115a83dd7df03d7637/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig #}
+{% use "form_div_layout.html.twig" %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul>
+            {%- for error in errors -%}
+                <li class="{{ error_item_class|default('error') }}">{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block choice_widget_expanded -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="flex items-center">
+                <div class="mr-2">
+                    {{- form_widget(child) -}}
+                </div>
+                {{- form_label(child, null, { translation_domain: choice_translation_domain }) -}}
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{# this block only renders the session selection widget during the
+   classroom creation wizard #}
+{%- block _createClassroomStep2_sessions_widget -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            {%- set id = form.vars.choices[child.vars.value].data.getId() -%}
+            {%- set PER = form.vars.choices[child.vars.value].data.getPer() -%}
+            {%- set group = child.vars.attr['data-year-group'] -%}
+            {%- set groupName = child.vars.attr['data-group-name'] -%}
+            <div class="flex items-center mb-2" data-year-group="{{ group }}" data-group-name="{{ groupName }}">
+                {{- form_widget(child) -}}
+                <div>
+                    {{- form_label(child, null, { translation_domain: choice_translation_domain }) -}}
+                    <a href="#"
+                       class="text-xs"
+                       data-controller="dialog-control"
+                       data-action="dialog-control#open"
+                       data-dialog-control-url-param="{{ path('session_detail', {id: id}) }}">
+                        {{ 'classroom.create.step.2.preview' | trans }}
+                    </a>
+                    <div>
+                        {% include 'components/per-list.html.twig' with {list: PER} %}
+                    </div>
+                </div>
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock -%}
+
+{%- block _createClassroomStep2_sessions_entry_widget -%}
+    {%- set checked = attr['checked'] ? " checked" : "" %}
+    {%- set attr = {} -%}
+    <label class="checkbox">
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+        <span class="checkbox-check"></span>
+    </label>
+{%- endblock -%}
+
+{%- block checkbox_widget -%}
+    <label class="checkbox">
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+        <span class="checkbox-check"></span>
+    </label>
+{%- endblock checkbox_widget -%}

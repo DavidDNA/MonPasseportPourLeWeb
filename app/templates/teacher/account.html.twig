@@ -1,0 +1,66 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% form_theme updatePasswordForm with [
+    'form/form-theme.html.twig'
+] %}
+
+{% block content %}
+    <div class="teacher-account">
+        <h1>{{ 'teacher.menu.account' | trans }}</h1>
+        {% include 'teacher/components/flashes.html.twig' %}
+        <div class="box">
+            <section class="mb-6">
+                <h2>{{ 'teacher.update.data.title' | trans }}</h2>
+                <div class="flex w-3/4">
+                    <div class="w-1/2">
+                        <label>{{ 'teacher.update.data.email' | trans }}</label>
+                    </div>
+                    <div class="w-1/2">
+                        {{ teacher.getEmail() }}
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-6">
+                <h2>{{ 'teacher.update.password.title' | trans }}</h2>
+                <p class="mb-2">{{ 'teacher.update.password.constraints' | trans }}</p>
+                {{ form_start(updatePasswordForm) }}
+                <div class="flex w-3/4 mb-2">
+                    <div class="w-1/2">
+                        <div>{{ form_label(updatePasswordForm.currentPassword) }}</div>
+                        <div class="error">{{ form_errors(updatePasswordForm.currentPassword) }}</div>
+                    </div>
+                    <div class="w-1/2">{{ form_widget(updatePasswordForm.currentPassword) }}</div>
+                </div>
+                <div class="flex w-3/4 mb-2">
+                    <div class="w-1/2">
+                        <div>{{ form_label(updatePasswordForm.newPassword.first) }}</div>
+                        <div class="error">{{ form_errors(updatePasswordForm.newPassword.first) }}</div>
+                    </div>
+                    <div class="w-1/2">{{ form_widget(updatePasswordForm.newPassword.first) }}</div>
+                </div>
+                <div class="flex w-3/4 mb-2">
+                    <div class="w-1/2">
+                        <div>{{ form_label(updatePasswordForm.newPassword.second) }}</div>
+                        <div class="error">{{ form_errors(updatePasswordForm.newPassword.second) }}</div>
+                    </div>
+                    <div class="w-1/2">
+                        {{ form_widget(updatePasswordForm.newPassword.second) }}
+                    </div>
+                </div>
+                <button type="submit" class="button button-positive">
+                    {{ 'teacher.update.password.save' | trans }}
+                </button>
+                {{ form_end(updatePasswordForm) }}
+            </section>
+            <section>
+                <h2>{{ 'teacher.update.delete.title' | trans }}</h2>
+                <div class="alert alert-warning">
+                    <p class="mb-2">{{ 'teacher.update.delete.message' | trans }}</p>
+                    <a href="{{ path('teacher_feedback') }}"
+                       class="button button-warning">{{ 'teacher.update.delete.action' | trans }}</a>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}

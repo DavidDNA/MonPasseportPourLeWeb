@@ -1,0 +1,14 @@
+{% if list|length > 0 and list[0] is not empty %}
+    <div class="per-list">
+        <div class="per-list-label">
+            {{ 'session.detail.PER'|trans }}
+        </div>
+        <div class="per-list-items">
+            {% for item in list %}
+                {% if item is not empty %}
+                    <span class="per-list-item">{{ item }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

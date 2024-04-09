@@ -1,0 +1,54 @@
+body {
+  @media screen {
+    @apply bg-p8;
+  }
+  font-family: "Montserrat", sans-serif;
+}
+
+a {
+  @apply text-p6;
+  font-weight: bold;
+
+  &:hover {
+    @apply text-p3;
+    text-decoration: none;
+  }
+}
+
+h1 {
+  @apply text-p3 text-3xl;
+  font-weight: bold;
+}
+
+.mpw-logo {
+  background: url('../images/mpw.svg') no-repeat center center / contain;
+  display: inline-block;
+  height: 30px;
+  width: 110px;
+}
+
+/** Print styles */
+.print-only {
+  display: none;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari 6 – 15.3, Edge */
+    color-adjust: exact !important; /* Firefox 48 – 96 */
+    print-color-adjust: exact !important; /* Firefox 97+, Safari 15.4+ */
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm 0;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+}

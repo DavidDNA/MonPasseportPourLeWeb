@@ -1,0 +1,172 @@
+base.title: Mon Passeport pour le Web
+home.title: Mon Passeport pour le Web
+home.teacher: Espace enseignant.e
+home.student: Espace élève
+teacher.menu.sessions: Séances
+teacher.menu.classrooms: Mes classes
+teacher.menu.help: Aide
+teacher.menu.account: Mon compte
+teacher.menu.logout: Se déconnecter
+teacher.login.title: Connexion
+teacher.login.email: Adresse e-mail
+teacher.login.password: Mot de passe
+teacher.login.action: Connexion
+teacher.login.create: Créer un compte
+teacher.login.recovery: Mot de passe oublié ?
+teacher.recovery.title: Mot de passe oublié
+teacher.recovery.email: Adresse e-mail de votre compte
+teacher.recovery.submit: Envoyer
+teacher.recovery.email.title: Mon Passeport pour le Web - Votre nouveau mot de passe
+teacher.recovery.email.head: Vous recevez ce message suite à une réinitialisation de mot de passe.
+teacher.recovery.email.password.1: 'Voici votre nouveau mot de passe: %password%'
+teacher.recovery.email.password.2: 'Changez-le impérativement une fois connecté.e sur la plateforme.'
+teacher.recovery.error: Une erreur s'est produite durant la réinitialisation, merci d'essayer à nouveau ultérieurement ou de nous contacter.
+teacher.recovery.success: Un nouveau mot de passe vous a été envoyé par mail !
+teacher.create.title: Nouveau compte
+teacher.create.warning: 'Nous invitons les personnes qui souhaitent utiliser mpweb.ch à suivre une formation, car la recherche documente qu’elle est nécessaire pour une mise en œuvre adéquate des contenus. Pour toutes informations supplémentaires, veuillez contacter :'
+teacher.create.email: Adresse e-mail
+teacher.create.password: Mot de passe
+teacher.create.password.repeat: Répétez
+teacher.create.terms: J'ai lu et j'accepte les
+teacher.create.terms.link: conditions générales
+teacher.create.action: Créer un compte
+teacher.create.confirm: Votre compte a été créé avec succès, un lien d'activation vous ont été envoyés par mail.
+teacher.create.back: Retour à la connexion
+teacher.create.email.title: Confirmation de votre compte
+teacher.create.email.head: 'Pour confirmer votre compte, cliquez sur le lien suivant:'
+teacher.create.email.link: confirmer mon compte
+teacher.create.email.expiration: Ce lien expirera dans
+teacher.terms.title: Conditions générales
+teacher.terms.back: Retour
+teacher.help.foundation: Fondements
+teacher.help.foundation.link: Fondements de Mon Passeport pour le Web (pdf)
+teacher.help.foundation.source: Code source de Mon Passeport pour Le Web
+teacher.help.presentation: Présentation générale
+teacher.help.usage: Utilisation de la plateforme
+teacher.update.data.title: Données du compte
+teacher.update.data.email: Adresse mail du compte
+teacher.update.password.title: Changer votre mot de passe
+teacher.update.password.old: Mot de passe actuel
+teacher.update.password.new: Nouveau mot de passe
+teacher.update.password.repeat: Répétez le nouveau mot de passe
+teacher.update.password.save: Enregistrer
+teacher.update.password.error_current: Ce n'est pas le bon mot de passe
+teacher.update.password.success: Votre mot de passe a bien été changé!
+teacher.update.password.constraints: Votre mot de passe doit contenir au moins 10 caractères, une minuscule, une majuscule et un caractère spécial (@#$%^&+=)
+teacher.update.delete.title: Supprimer votre compte
+teacher.update.delete.message: Pour supprimer votre compte, contactez-nous via le formulaire de feedbacks.
+teacher.update.delete.action: Contact
+teacher.verify.success: Votre adresse mail a été vérifiée avec succès ! Connectez-vous avec vos informations ci-dessous.
+teacher.verify.error: Votre adresse mail n'a pas pu être vérifiée, merci d'essayer à nouveau dans quelques instants ou de nous contacter en indiquant l'erreur ci-dessous..
+teacher.feedback.title: Feedback
+teacher.feedback.name: Votre nom et prénom
+teacher.feedback.message: Message
+teacher.feedback.success: Votre feedback nous est bien parvenu et sera traité dans les meilleurs délais ! Merci !
+teacher.feedback.error: Une erreur s'est produite et votre feedback n'a pas pu être envoyé. Merci d'essayer à nouveau dans quelques instants ou de nous contacter en indiquant l'erreur ci-dessous.
+teacher.feedback.mail: Votre adresse mail
+teacher.feedback.send: Envoyer
+teacher.feedback.email.title: Nouveau feedback !
+teacher.feedback.email.footer: Envoyé par %name% <%email%>
+classroom.list.title: Mes classes
+classroom.list.create: Nouvelle classe
+classroom.list.none: Vous n'avez pas encore créé de classe.
+classroom.list.sessions: séances
+classroom.list.students: élèves
+classroom.list.feedbacks: Une idée d'amélioration ?
+classroom.list.feedbacks.link: Envoyez-nous un feedback
+classroom.create.title: Nouvelle classe
+classroom.create.cancel: annuler
+classroom.create.step.1.title: Quelle est la finalité du passeport ?
+classroom.create.step.1.subtitle: Une fois ce passeport en poche, l'enfant pourra voyager sur le Web...
+classroom.create.step.2.title: Sélectionnez les séances
+classroom.create.step.2.block_resources: Bloquer l'accès aux ressources des séances tant qu'elles n'ont pas commencé. Ce paramètre s'applique aux élèves uniquement.
+classroom.create.step.2.preview: aperçu
+classroom.create.step.3.title: Combien d'accès élèves doivent-être créés ?
+classroom.create.yeargroup.1: ...avec l'accompagnement explicite de l'adulte (~1-2H / ~4-6 ans)
+classroom.create.yeargroup.2: ...avec un itinéraire prédéterminé par l'adulte (~3-4H / ~6-8 ans)
+classroom.create.yeargroup.3: ...dans une diversité de lieux, sous la surveillance de l'adulte (~5-6H / ~8-10 ans)
+classroom.create.yeargroup.4: ...ouvertement, en parallèle à des discussions régulières avec l'adulte (~7-8H / ~10-12 ans)
+classroom.create.yeargroup.5: ...librement, avec une attention aux pratiques sécures et positives (~9H / 12-13 ans)
+classroom.create.yeargroup.6: ...librement, de manière réfléchie et participative (~10H / 13-14 ans)
+classroom.create.yeargroup.7: ...librement, de manière critique et engagée (~11H / +14 ans)
+classroom.create.help: aide
+classroom.create.confirmation.title: Félicitations! La classe est créée.
+classroom.create.confirmation.details: Voir la classe
+classroom.create.confirmation.accesses: Imprimer les accès élève
+classroom.create.confirmation.list: Retour à la liste des classes
+classroom.create.onboarding.title: Commencez par créer une classe
+classroom.create.onboarding.cancel: passer cette étape
+classroom.detail.title: Classe %code%
+classroom.detail.menu.sessions: Plan des séances
+classroom.detail.menu.portfolio: Imprimer le portfolio
+classroom.detail.menu.print: Imprimer les accès élèves
+classroom.detail.menu.add: Ajouter un.e élève
+classroom.detail.menu.delete: Supprimer la classe
+classroom.detail.add_student.success: Un.e élève a été ajouté à la classe!
+classroom.detail.progression.title: Progression
+classroom.detail.progression.student: Elève
+classroom.detail.progression.label: Tous les élèves
+classroom.detail.student.title: Elève
+classroom.detail.student.open_passport: Ouvrir le passeport
+classroom.detail.student.password: Mot de passe
+classroom.detail.student.progression: Progression
+classroom.detail.student.delete: Supprimer l'élève
+classroom.detail.status.todo: Séance à faire
+classroom.detail.status.in_progress: Séance en cours
+classroom.detail.status.done: Séance validée
+classroom.detail.session: Séance
+classroom.print.title: Classe %code%
+classroom.print.doc_title: Liste des accès
+classroom.print.list_title: Fiche pour l'enseignant.e
+classroom.print.grid_title: Etiquettes pour les élèves
+classroom.print.mode.grid: Étiquettes élèves
+classroom.print.mode.list: Liste enseignant.e
+classroom.print.action: Tout imprimer
+classroom.print.id: Elève
+classroom.print.student: Elève %index%
+classroom.print.name: Nom / prénom
+classroom.print.access: Lien de connexion
+classroom.print.password: Code secret
+classroom.print.student_access: Accès élèves
+classroom.confirm_dialog.title: Êtes-vous sûr.e ?
+classroom.confirm_dialog.delete_message.body: Cette action entraînera la suppression de données. Êtes-vous sûr.e de vouloir continuer ?
+classroom.confirm_dialog.delete_message.instructions: Entrez "OUI" dans le champ ci-dessous pour confirmer.
+classroom.confirm_dialog.delete_message.word: OUI
+classroom.confirm_dialog.update_message: Cette action entraînera la modification de plusieurs éléments.
+classroom.confirm_dialog.remove_session_message: Vous pouvez retirer une session de cette classe mais vous ne pourrez pas en rajouter ! Cette action entraînera la modification de plusieurs éléments.
+classroom.confirm_dialog.cancel: Annuler
+classroom.confirm_dialog.confirm: Confirmer
+classroom.session_plan.title: Séances pour la classe %code%
+classroom.session_plan.objectives: Tableau des objectifs
+classroom.session_plan.activities: Activités des séances
+classroom.session_plan.PER: Liens avec les objectifs (inter)disciplinaires
+classroom.session_plan.session: Séance %n%
+classroom.session_plan.activity: Activité %n%
+classroom.portfolio.summary: Page de synthèse
+session.list.title: Toutes les séances
+session.list.create: Nouvelle séance
+session.detail.save: Sauvegarder
+session.detail.delete: Supprimer
+session.detail.preview: Aperçu
+session.detail.general: Informations générales
+session.detail.name: Nom
+session.detail.title: Titre
+session.detail.year_group: Degré
+session.detail.PER: Liens interdisciplinaires
+session.detail.PER.color.main: Couleur d'entête de la séance
+session.detail.PER.color.text: Couleur tu texte d'entête de la séance
+session.detail.PER.objectives: Objectifs PER/EdNum (tableau)
+session.detail.objectives: Objectifs
+session.detail.material: Matériel
+session.detail.materialUrl: Lien vers le Drive du matériel
+session.detail.download: Télécharger tout le matériel
+session.detail.teacher_indications: Implication de l'enseignant·e
+session.detail.activities: Activités
+session.detail.activity.title: Titre
+session.detail.activity.duration: Durée
+session.detail.activity.content: Contenu
+session.detail.activity.resources: Ressources
+session.detail.activity.flow: Déroulement
+session.detail.activity.add: Ajouter une activité
+session.detail.student_resources: Ressources élève
+session.detail.summary: Synthèse

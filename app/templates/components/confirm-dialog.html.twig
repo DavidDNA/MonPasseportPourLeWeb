@@ -1,0 +1,29 @@
+<div id="{{ id }}" class="dialog confirm-dialog"
+     data-controller="confirm-dialog"
+     data-action="keydown.esc->confirm-dialog#close"
+     tabindex="0">
+    <div class="dialog-inner p-4">
+        <div class="dialog-title">{{ 'classroom.confirm_dialog.title' | trans }}</div>
+        <div class="dialog-message">
+            {% block message %}
+                <div class="text-center">
+                    <p class="mb-2">{{ 'classroom.confirm_dialog.delete_message.body' | trans }}</p>
+                    <p class="mb-2">{{ 'classroom.confirm_dialog.delete_message.instructions' | trans }}</p>
+                    <input data-confirm-dialog-target="confirmInput"
+                           data-action="keyup->confirm-dialog#onConfirmInputUp"
+                           data-confirm-word="{{ 'classroom.confirm_dialog.delete_message.word' | trans }}"
+                           type="text"/>
+                </div>
+            {% endblock %}
+        </div>
+        <div class="dialog-actions">
+            <button class="button"
+                    data-action="confirm-dialog#cancel">{{ 'classroom.confirm_dialog.cancel' | trans }}
+            </button>
+            <button class="button button-warning"
+                    data-confirm-dialog-target="confirm"
+                    data-action="confirm-dialog#confirm">{{ 'classroom.confirm_dialog.confirm' | trans }}
+            </button>
+        </div>
+    </div>
+</div>

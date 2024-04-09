@@ -1,0 +1,387 @@
+@import "../_mixin";
+
+.view-classroom-list-none {
+  @apply flex items-center justify-center bg-p2;
+  min-height: 150px;
+}
+
+.view-classroom-list-table {
+  > div > div {
+    width: 20%;
+  }
+}
+
+.view-classroom-wizard {
+  @apply max-w-3xl mx-auto text-center;
+}
+
+.view-classroom-wizard-form {
+  @apply bg-p2 mt-2 py-4 px-8 shadow-lg;
+}
+
+.view-classroom-wizard-form-fields {
+  @apply my-4 text-left;
+}
+
+.view-classroom-wizard-step-3 .view-classroom-wizard-form-fields {
+  @apply text-center;
+}
+
+.view-classroom-wizard-footer {
+  @apply mt-4 flex items-center justify-center;
+
+  > a {
+    line-height: 1;
+
+    &:first-child {
+      @apply pr-2 mr-2 border-r border-r-p3;
+    }
+  }
+}
+
+.view-classroom-detail h1 {
+  @apply flex items-center;
+
+  span {
+    display: block;
+  }
+}
+
+.view-classroom-detail-yeargroup,
+.view-classroom-detail-url {
+  @apply ml-2 text-p4;
+  line-height: 1.15;
+  font-size: 50%;
+}
+
+.view-classroom-detail-url {
+  font-size: 40%;
+  font-weight: 500;
+}
+
+.view-classroom-detail-table-wrap {
+  overflow-y: auto;
+}
+
+.view-classroom-detail-table {
+  @apply bg-slate-50;
+  table-layout: fixed;
+  min-width: 100%;
+
+  tr {
+    position: relative;
+
+    &.student-disabled td:first-child button {
+      text-decoration: line-through;
+    }
+  }
+
+  td, th {
+    @apply py-2 px-3;
+    text-align: center;
+  }
+
+  th {
+    @apply bg-p3 text-white;
+    font-weight: normal;
+
+    a {
+      @apply text-white;
+    }
+  }
+
+  td, th {
+    min-width: 100px;
+  }
+
+  td:first-child,
+  th:first-child {
+    text-align: left;
+    min-width: 175px;
+  }
+
+  td form {
+    @apply flex items-center justify-center;
+  }
+
+  tbody tr:hover {
+    @apply bg-slate-200;
+  }
+
+  button {
+    @apply text-p3;
+    font-weight: 500;
+  }
+}
+
+.view-classroom-detail-heading {
+  font-size: .9rem;
+  padding: 0 !important;
+  position: relative;
+
+  > button {
+    @apply text-white py-2 px-3;
+    min-height: 48px;
+  }
+
+  &:hover {
+    @apply bg-p9;
+  }
+}
+
+.view-classroom-detail-heading-remove-session {
+  @include absolute(null, calc(100% - 8px), 50%, null);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.5) translate(20px, 50%);
+  transform-origin: 50% 100%;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 1;
+
+  button {
+    @apply text-p6 bg-white shadow-md;
+    border-radius: 50%;
+    font-size: .9rem;
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.view-classroom-detail-heading:hover .view-classroom-detail-heading-remove-session {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1) translate(0, 50%);
+}
+
+.view-classroom-detail-table .status {
+  transition: transform .25s ease, background .1s ease;
+
+  &:active {
+    transform: scale(1.25);
+  }
+}
+
+.view-classroom-detail-actions {
+  @apply flex flex-wrap items-center space-x-2 mb-8;
+
+  > li {
+    @apply my-1;
+  }
+}
+
+.view-classroom-detail-footer {
+  display: flex;
+}
+
+.view-classroom-detail-legend {
+  border-radius: 0 0 3px 3px;
+  margin-left: auto;
+  text-align: right;
+
+  > div {
+    @apply py-3 px-6 bg-white shadow-md bg-white;
+    display: inline-block;
+  }
+
+  .status {
+    @apply mr-2;
+  }
+}
+
+.view-classroom-detail-legend-item {
+  @apply flex items-center mb-1;
+}
+
+.craue_formflow_buttons {
+  @apply flex flex-row-reverse justify-center space-x-reverse space-x-4;
+
+  button {
+    @extend .button;
+  }
+}
+
+#createClassroomStep1_classroom label {
+  font-weight: normal !important;
+}
+
+#createClassroomStep1_classroom_yearGroup > div {
+  @apply mb-2;
+}
+
+#createClassroomStep2_sessions {
+  label {
+    font-weight: bold;
+  }
+
+  .tab-name {
+    @apply bg-p9 py-2 px-4 text-p2 rounded-md mb-2 mt-6;
+    font-weight: bold;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.view-classroom-print-actions {
+  @apply flex items-stretch space-x-2 ml-auto;
+}
+
+.view-classroom-print-mode {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+
+    ul {
+      display: block;
+    }
+  }
+
+  > div {
+    @apply flex items-center bg-p3 text-white px-2;
+    height: 36px;
+  }
+
+  ul {
+    @apply border border-t-0 border-slate-400;
+    @include absolute(100%, null, null, 0);
+    display: none;
+    min-width: 100%;
+  }
+
+  a {
+    @apply bg-slate-50 text-slate-500 p-2;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      @apply bg-slate-100;
+    }
+  }
+}
+
+.view-classroom-print {
+  @media screen {
+    margin: auto;
+    height: 277mm;
+    width: 210mm;
+  }
+}
+
+.view-classroom-print-head {
+  @apply flex items-center;
+
+  > a {
+    @apply mr-2 text-p3;
+
+    &:hover {
+      @apply text-p6;
+    }
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+}
+
+.view-classroom-print-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -1%;
+
+  > div {
+    flex: 0 0 48%;
+    margin: 1%;
+  }
+
+  .view-classroom-print-item {
+    @apply border border-p3 px-4 py-3 overflow-hidden bg-p2;
+  }
+
+  .view-classroom-print-field {
+    @apply py-1;
+
+    &:not(.break) {
+      align-items: stretch;
+      display: flex;
+
+      > div {
+        flex: 0 0 50%;
+      }
+    }
+  }
+}
+
+.view-classroom-print-list-footer {
+  @apply py-4;
+}
+
+.view-classroom-print-list {
+}
+
+.view-classroom-print-list-table {
+  // TODO: let's see if we can do this better
+  @media screen {
+    @apply border border-p3 px-4 py-6 bg-p2;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      @apply border-b-2 border-slate-200 pb-4;
+    }
+
+    tr:first-child td {
+      @apply pt-4;
+    }
+
+    th:nth-child(1) {
+      width: 200px;
+    }
+
+    th:nth-child(3) {
+      width: 150px;
+    }
+
+    td:nth-child(3) {
+      text-align: center;
+    }
+  }
+
+  .student-password {
+    justify-content: center;
+  }
+
+  .view-classroom-print-item td {
+    @apply py-2;
+  }
+}
+
+.view-classroom-print-label {
+  @apply text-p3;
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+.view-classroom-print-input {
+  @apply border-b-2;
+}
+
+/** --------------------------------------------------------
+ |
+ |  Passport
+ |
+ * -------------------------------------------------------- */
+
+.classroom-student-passport {
+  margin: 50px auto;
+  width: calc(210mm - 3cm);
+}
+
+.classroom-student-passport-controls {
+  @apply mb-8;
+  text-align: right;
+}

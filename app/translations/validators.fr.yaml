@@ -1,0 +1,4 @@
+email.not.unique: Un compte existe déjà avec cette adresse mail
+terms.accept: Vous devez accepter les termes et conditions
+teacher.create.email.invalid: Cette adresse e-mail n'est pas valide
+teacher.update.password.invalid: Votre mot de passe n'est pas assez fort (selon indications)

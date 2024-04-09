@@ -1,0 +1,874 @@
+@import "../mixin";
+
+$bounceInterpol: cubic-bezier(.68, .82, .58, 1.33);
+$progressBarWidth: 45px;
+
+.student-login {
+  @apply flex;
+  @include fixed();
+
+  header {
+    @apply mb-8;
+    @include fixed(1rem, 1rem, null, 0);
+  }
+}
+
+.student-login-intro {
+  @apply flex items-center justify-center text-4xl bg-p3;
+  @include fixed(0, 0, 0, 0);
+  text-align: center;
+
+  img {
+    @apply mb-5;
+    display: inline-block;
+    width: 500px;
+  }
+}
+
+.student-login-door {
+  @apply bg-p8;
+  transition: left 1.5s .75s ease, right 1.5s .75s ease;
+  width: 50vw;
+}
+
+.student-login-door-left {
+  @include fixed(0, 50vw, 0, 0);
+}
+
+.student-login-door-right {
+  @include fixed(0, 0, 0, 50vw);
+}
+
+.student-login-animation {
+  align-items: flex-start;
+  display: flex;
+  transition: transform .5s ease;
+
+  svg {
+    max-height: 100vh;
+    height: auto !important;
+    width: 100% !important;
+  }
+}
+
+.student-login-main {
+  @include flex-center-full;
+  flex-direction: column;
+  flex-grow: 1;
+  opacity: 1;
+  position: relative;
+  transition: opacity .5s ease;
+  z-index: 1;
+}
+
+.student-login-box-heading {
+  text-align: center;
+
+  > h1 {
+    @apply mb-12;
+  }
+}
+
+.student-login-logo {
+  @apply mb-4 mx-auto;
+  height: auto;
+  display: block;
+  max-width: 85%;
+  width: 450px;
+}
+
+.student-login-box {
+  @apply border-4 border-p9;
+  position: relative;
+  width: 500px;
+
+  h2 {
+    @apply text-p6 my-4;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.student-login-code-input {
+  @apply flex items-stretch justify-center;
+
+  input {
+    @apply border-4 border-p9 text-p3;
+    background: transparent;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    width: 160px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    @apply border-2 py-0.5 px-2 bg-p9 text-p2;
+    border: none;
+    margin: 0;
+    width: 40px;
+
+    &:hover {
+      opacity: .75;
+    }
+  }
+}
+
+.student-login-box-loading {
+  @include absolute;
+  @include flex-center-full;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 0.75rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.student-login.loading .student-login-box-loading {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.student-login-box-back {
+  @include absolute(-1rem, null, null, -1rem);
+  @include flex-center-full;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+.student-login-box-classroom {
+  @include absolute(null, 0, calc(100% + 4px),);
+  font-size: 1.3rem;
+  pointer-events: none;
+  text-align: center;
+
+  > div {
+    @apply bg-p6 px-4 text-p2;
+    display: inline-block;
+    font-weight: bold;
+    pointer-events: all;
+  }
+}
+
+.student-login-box-back,
+.student-login-box-classroom {
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.student-login.step-2 {
+  .student-login-code-indications {
+    animation: student-login-indications 3s 1s linear infinite;
+  }
+
+  .student-login-box-back,
+  .student-login-box-classroom {
+    opacity: 1;
+  }
+}
+
+.student-login-box-inner {
+  overflow: hidden;
+  user-select: none;
+}
+
+.student-login-box-steps {
+  align-items: center;
+  display: flex;
+  transition: margin-left .25s ease;
+  width: 100%;
+}
+
+.student-login-classroom-error,
+.student-login-code-error {
+  @apply text-red-600 font-bold text-center;
+  pointer-events: none;
+}
+
+.student-login-classroom-error {
+  display: none;
+}
+
+.student-login-code-error {
+  height: 0;
+  opacity: 0;
+  transition: height .5s .45s ease, opacity .5s .45s ease;
+}
+
+.student-login.error.error-code .student-login-code-error {
+  height: 50px;
+  opacity: 1;
+}
+
+.student-login.error.error-classroom .student-login-classroom-error {
+  display: block;
+}
+
+.student-login.step-2 .student-login-box-steps {
+  margin-left: -100%;
+}
+
+.student-login-box-step {
+  flex: 0 0 100%;
+}
+
+.student-login-code-indications {
+  @include absolute(70px, calc(100% - 20px), null, null);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  width: 200px;
+}
+
+.student-login-composer {
+  height: 200px;
+  opacity: 1;
+  overflow: hidden;
+  transition: height .5s .45s ease, opacity .5s .45s ease;
+}
+
+.student-login-row {
+  @apply space-x-6 flex items-center justify-center mb-6;
+}
+
+.student-password-shape {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 90% auto;
+  height: 70px;
+  margin-top: .25rem;
+  transition: transform .15s ease;
+  width: 70px;
+
+  &:hover {
+    cursor: grab;
+    transform: scale(1.1);
+  }
+}
+
+.student-password-square {
+  background-image: url('../../images/shapes/shape-square.svg');
+}
+
+.student-password-circle {
+  background-image: url('../../images/shapes/shape-circle.svg');
+}
+
+.student-password-triangle {
+  background-image: url('../../images/shapes/shape-triangle.svg');
+}
+
+.student-password-diamond {
+  background-image: url('../../images/shapes/shape-diamond.svg');
+}
+
+.student-password-color {
+  border: 3px solid transparent;
+  border-radius: 0 0 50% 50%;
+  height: 70px;
+  transition: transform .2s $bounceInterpol;
+  width: 70px;
+
+  &.drag-over {
+    transform: scale(1.15) rotate(15deg);
+    border-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.student-password-yellow {
+  @apply bg-password-yellow;
+}
+
+.student-password-red {
+  @apply bg-password-red;
+}
+
+.student-password-pink {
+  @apply bg-password-pink;
+}
+
+.student-password-blue {
+  @apply bg-password-blue;
+}
+
+.student-login-input {
+  @apply border-t-4 border-p9;
+  margin: auto;
+  position: relative;
+  width: 100%;
+}
+
+.student-password-clear {
+  @include absolute(2.25rem, 1.5rem, null, null);
+  @include flex-center-full;
+  border-radius: 50%;
+  height: 30px;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .5s ease, opacity .5s ease;
+  transform: translateX(-2rem);
+  width: 30px;
+  z-index: 2;
+}
+
+.student-login-characters {
+  @apply flex items-center justify-center space-x-6 px-4 rounded-md;
+  margin: auto;
+  position: relative;
+  height: 100px;
+  z-index: 1;
+}
+
+.student-password-character {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: transform .5s $bounceInterpol;
+  transform: scale(0) rotate(180deg);
+  height: 70px;
+  width: 70px;
+
+  &.active {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+[class^=student-password-diamond] {
+  height: 85px;
+  width: 85px;
+}
+
+.student-login-submit {
+  @apply mt-2 rounded-md;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+  transition: margin .5s ease, opacity .5s ease;
+}
+
+/** when there is at least 1 character in the field */
+.student-login.has-input {
+  .student-login-code-indications {
+    // keeping the previous animation will apply the fade at the
+    // current animation position
+    animation: student-login-indications 3s 1s linear forwards, student-login-indications-fade 1.2s forwards;
+  }
+}
+
+/** filled input state */
+.student-login.filled {
+
+  .student-login-composer {
+    opacity: 0;
+    height: 0;
+  }
+
+  .student-password-clear {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+    transition-delay: .85s;
+  }
+
+  .student-login-submit {
+    @apply mb-4;
+    opacity: 1;
+    pointer-events: all;
+    margin-top: 0;
+    transition-delay: .85s;
+  }
+
+  .student-login-code-error {
+    height: 0 !important;
+    opacity: 0 !important;
+  }
+}
+
+/** logged in state */
+.student-login.logged {
+  .student-login-animation {
+    transform: translateX(-100%);
+  }
+
+  .student-login-main {
+    opacity: 0;
+  }
+
+  .student-login-door-left {
+    left: -50vw;
+    right: 100vw;
+  }
+
+  .student-login-door-right {
+    left: 100vw;
+    right: -50vw;
+  }
+}
+
+/** generate classes for each shape/color combination */
+/** TODO: merge with student-password.scss */
+$colors: 'blue', 'yellow', 'pink', 'red';
+$shapes: 'square', 'diamond', 'circle', 'triangle';
+
+@each $shape in $shapes {
+  @each $color in $colors {
+    .student-password-#{$shape}-#{$color} {
+      background-image: url("../../images/shapes/#{$shape}-#{$color}.svg");
+    }
+  }
+}
+
+/** student's main view */
+@mixin student-main-border($bt: true, $br: true, $bb: true, $bl: true) {
+  @apply border-p2;
+  border-style: solid;
+  border-width: 3px;
+
+  @if ($bt == false) {
+    border-top: 0;
+  }
+
+  @if ($br == false) {
+    border-right: 0;
+  }
+
+  @if ($bb == false) {
+    border-bottom: 0;
+  }
+
+  @if ($bl == false) {
+    border-left: 0;
+  }
+}
+
+.student-main {
+  @apply bg-p8;
+  display: flex;
+  min-height: 100vh;
+}
+
+.student-main-left {
+  display: flex;
+  flex: 0 0 max(330px, 400px);
+  flex-direction: column;
+  position: relative;
+}
+
+.student-main-left-title {
+  @apply py-3 text-p2 bg-p6;
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  height: 46px;
+  justify-content: center;
+  padding-right: $progressBarWidth;
+  position: relative;
+  z-index: 10;
+
+  img {
+    @include absolute(50%, 0, null, null);
+    display: block;
+    height: auto;
+    margin: 0 calc($progressBarWidth / 2) 0 0;
+    transform: translate(50%, -50%);
+    width: 1rem;
+  }
+
+  &.unlocked {
+    @include student-main-border(false, false, true, false);
+    @apply bg-p5 text-black;
+  }
+}
+
+.student-main-left-avatar {
+  @apply rounded-full bg-p8 border-p4;
+  @include absolute(30px, $progressBarWidth, null, 0);
+  border-style: solid;
+  border-width: 3px;
+  display: block;
+  height: 250px;
+  margin: 30px auto auto auto;
+  overflow: hidden;
+  width: 250px;
+  z-index: 1;
+
+  .avatar {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.student-main-left-progress {
+  @apply bg-p3;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.student-main-progress-mask {
+  @include absolute(null, 0, 0, 0);
+  @apply bg-p5;
+}
+
+.student-main-progress-mask-pixels {
+  @include absolute(null, $progressBarWidth, 100%, 0);
+
+  /** Hide glitches */
+  &:after {
+    @apply bg-p5;
+    @include absolute(null, 0, 0, 0);
+    content: '';
+    height: 80px;
+  }
+}
+
+/** State: full */
+.student-main-progress-mask.full {
+  top: 0 !important;
+
+  .student-main-progress-mask-pixels {
+    display: none;
+  }
+}
+
+.student-main-progress-number {
+  @apply text-p2;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: 5vh;
+  position: relative;
+  text-align: center;
+}
+
+.student-main-progress-bar {
+  @apply bg-p3;
+  @include absolute(0, 0, 0, null);
+  @include student-main-border(false, false, false);
+  width: $progressBarWidth;
+}
+
+.student-main-progress-upgrade {
+  @apply text-p2;
+  align-items: center;
+  display: flex;
+  height: 20px;
+  left: calc(50% - 10px);
+  margin-bottom: -10px;
+  position: absolute;
+  justify-content: center;
+  width: 20px;
+  z-index: 10;
+}
+
+.student-main-progress-bar-fill {
+  @apply bg-p5;
+  @include absolute(null, 0, 0, 0);
+}
+
+.student-main-right {
+  @apply bg-p8;
+  flex-grow: 1;
+  max-width: 1080px;
+  padding: 110px 5vw;
+
+  h1 {
+    @apply text-p6 text-2xl;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+}
+
+.student-main-logo {
+  @include absolute(2rem, 1rem, null, null);
+  height: 51px;
+  width: 187px;
+}
+
+.student-main-progress-subtitle {
+  @apply text-p3 text-2xl mb-6;
+  font-weight: bold;
+}
+
+.student-main-left-controls {
+  padding: 2rem calc(2rem + $progressBarWidth) 2rem 2rem;
+  text-align: center;
+  z-index: 1;
+
+  a {
+    &:not(:last-child) {
+      @apply mb-2;
+    }
+
+    display: block;
+  }
+}
+
+.student-main-progress-item {
+  @apply flex items-center mb-2 py-2 px-4 bg-p2;
+
+  .status {
+    @apply mr-3;
+    --status-size: 1.75rem;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+
+.student-main-progress-item-title {
+  @apply text-lg;
+}
+
+.student-main-progress-passport {
+  @apply bg-p5 p-4 mt-8;
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+
+  a {
+    font-weight: normal;
+    margin-left: auto;
+  }
+}
+
+.student-upgrade-dialog {
+  @include fixed;
+  @apply flex items-center justify-center;
+  background: theme('colors.p3/.8');
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease;
+  z-index: 200;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.student-upgrade-dialog-inner {
+  @apply bg-p2 flex items-stretch;
+}
+
+.student-upgrade-dialog-avatar {
+  @apply flex items-stretch bg-p8;
+  box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.15);
+  width: 300px;
+
+  .avatar {
+    width: 100%;
+  }
+}
+
+.student-upgrade-dialog-choice {
+  overflow: hidden;
+  position: relative;
+  height: 400px;
+  transition: width .5s ease;
+  width: 560px;
+}
+
+.student-upgrade-dialog-choice-inner {
+  @apply flex items-center justify-center flex-col;
+  @include absolute(0, 50%, 0, null);
+  margin-right: -280px;
+  height: 100%;
+  width: 560px;
+}
+
+.student-upgrade-dialog-title {
+  @apply text-2xl text-p3;
+  font-weight: bold;
+  text-align: center;
+}
+
+.student-upgrade-dialog-subtitle {
+  @apply text-p3 mb-2;
+  text-align: center;
+}
+
+.student-upgrade-dialog-choices {
+  @apply flex items-center justify-center space-x-3 my-3;
+
+  > button {
+    @apply border-4 pb-2;
+    border-color: transparent;
+    font-weight: bold;
+    flex: 0 0 150px;
+    flex-wrap: wrap;
+    text-align: center;
+    transition: transform .15s ease, background-color .15s ease;
+
+    &.animation {
+      @apply p-4 border-p4;
+
+      span {
+        display: none;
+      }
+    }
+
+    &:hover {
+      @apply border-p4;
+      cursor: pointer;
+      transform: scale(1.025);
+    }
+
+    &:active,
+    &.selected {
+      @apply border-p9 bg-p9 text-p2;
+    }
+
+    &:active {
+      transform: scale(1.075);
+    }
+  }
+}
+
+.student-upgrade-dialog-choice-preview {
+  @apply mb-2;
+  background: #f4f4f4;
+  display: block;
+  height: 150px;
+  width: 150px;
+}
+
+.student-upgrade-dialog-error {
+  @apply text-p6 px-4;
+  display: none;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.student-upgrade-dialog-controls {
+  @apply flex items-center justify-center;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity .15s ease;
+}
+
+/** state: error */
+.student-upgrade-dialog.error .student-upgrade-dialog-error {
+  display: block;
+}
+
+/** state: loading */
+.student-upgrade-dialog.loading {
+  .student-upgrade-dialog-controls {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/** state: folded */
+.student-upgrade-dialog.folded {
+
+  .student-upgrade-dialog-inner {
+    animation: bounce .5s .65s ease forwards;
+  }
+
+  .student-upgrade-dialog-choice {
+    width: 0;
+  }
+
+  .student-upgrade-dialog-controls {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/** animation keyframes */
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  70% {
+    transform: scale(.98);
+  }
+
+  90% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes student-login-indications {
+  0% {
+    opacity: 0;
+    transform: scale(.75) translateY(0);
+  }
+
+  6% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  9% {
+    transform: scale(1.1) translateY(0);
+  }
+
+  12% {
+    transform: scale(1) translateY(0);
+  }
+
+  45% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(1) translateY(90px);
+  }
+
+  95% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1) translateY(90px);
+  }
+}
+
+@keyframes student-login-indications-fade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/** --------------------------------------------------------
+ |
+ |  Passport
+ |
+ * -------------------------------------------------------- */
+
+.student-passport {
+  margin: 50px auto;
+  width: calc(210mm - 3cm);
+}
+
+.student-passport-controls {
+  @apply mb-8;
+}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="view-session-sheet">
+        <header>
+            <h1>{{ session.getTitle() }}</h1>
+        </header>
+        <section>
+            <div>{{ session.getStudentResources() | raw }}</div>
+        </section>
+    </div>
+{% endblock %}

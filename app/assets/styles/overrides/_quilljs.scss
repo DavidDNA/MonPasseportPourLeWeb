@@ -1,0 +1,18 @@
+.ql-container {
+  @apply bg-white;
+
+  &:not(:disabled) {
+    &:hover {
+      @apply border-slate-800 text-black;
+    }
+  }
+
+  &.ql-bubble {
+    @apply border-2;
+  }
+}
+
+.ql-video.ql-align-center {
+  margin: auto;
+  text-align: center;
+}

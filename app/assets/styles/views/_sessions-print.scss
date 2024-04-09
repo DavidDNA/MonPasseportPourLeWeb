@@ -1,0 +1,42 @@
+@media print {
+
+  .view-session-sheet,
+  .view-session-plan {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .view-session-plan-objectives {
+    box-shadow: unset;
+  }
+
+  .view-session-sheet {
+    iframe {
+      display: none;
+    }
+
+    section {
+      background: unset;
+      box-shadow: unset;
+      padding: 0;
+    }
+
+    h2 {
+      @apply rounded-md;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 0;
+      -webkit-print-color-adjust: exact !important; /* Chrome, Safari 6 – 15.3, Edge */
+      color-adjust: exact !important; /* Firefox 48 – 96 */
+      print-color-adjust: exact !important; /* Firefox 97+, Safari 15.4+ */
+    }
+  }
+
+  .view-session-sheet-download {
+    display: none;
+  }
+
+  .view-session-sheet-resources a {
+    box-shadow: unset;
+  }
+}

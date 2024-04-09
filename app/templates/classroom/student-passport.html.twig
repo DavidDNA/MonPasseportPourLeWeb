@@ -1,0 +1,15 @@
+{% extends 'student/layout.html.twig' %}
+{% trans_default_domain 'student' %}
+
+{% block bodyClasses %}{% endblock %}
+
+{% block body %}
+    <div class="classroom-student-passport">
+        <div class="classroom-student-passport-controls print-hidden">
+            <button class="button button-primary" data-controller="print" data-action="print#print">
+                {{ 'student.passport.print' | trans }}
+            </button>
+        </div>
+        {% include 'components/passport.html.twig' with {student: student} %}
+    </div>
+{% endblock %}

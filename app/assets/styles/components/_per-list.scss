@@ -1,0 +1,12 @@
+.per-list {
+}
+
+.per-list-label {
+  @apply text-sm mb-1 text-slate-500;
+  font-style: italic;
+}
+
+.per-list-item {
+  @apply mr-2 mb-1 bg-p4 text-p2 rounded-md px-1 py-0.5;
+  display: inline-block;
+}

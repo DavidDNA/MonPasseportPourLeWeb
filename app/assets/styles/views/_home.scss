@@ -1,0 +1,7 @@
+@import "../mixin";
+
+.home {
+  @include flex-center-full;
+  min-height: 100vh;
+}
+

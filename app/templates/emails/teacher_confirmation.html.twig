@@ -1,0 +1,9 @@
+<h1>{{ 'teacher.create.email.title' | trans }}</h1>
+
+<p>
+    {{ 'teacher.create.email.head' | trans }} <a
+            href="{{ signedUrl|raw }}">{{ 'teacher.create.email.link' | trans }}</a>
+</p>
+<p>
+    {{ 'teacher.create.email.expiration' | trans }} {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}
+</p>

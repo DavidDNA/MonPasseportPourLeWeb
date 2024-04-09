@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="portfolio">
+        {% for relation in classroom.getSessions() %}
+            {% set session = relation.getSession() %}
+
+            <div class="portfolio-block">
+                <div class="portfolio-title">{{ session.getTitle() }}</div>
+                <div class="portfolio-objectives">{{ session.getObjectives() | raw }}</div>
+            </div>
+        {% endfor %}
+
+        <div class="portfolio-block">
+            <div class="portfolio-title">{{ 'classroom.portfolio.summary' | trans() }}</div>
+        </div>
+    </div>
+{% endblock %}
+

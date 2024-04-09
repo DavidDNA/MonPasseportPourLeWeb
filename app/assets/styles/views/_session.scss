@@ -1,0 +1,172 @@
+@import "../_mixin";
+
+.view-session-detail {
+  label {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.view-session-detail-activities > div {
+  @apply border rounded-md mb-4 p-5;
+  position: relative;
+
+  button.button-negative {
+    @include absolute(-0.5rem, -0.5rem, null, null);
+  }
+}
+
+.view-session-plan {
+  @apply p-6;
+  margin: auto;
+  min-height: 277mm;
+  width: 210mm;
+
+  .table {
+    @apply mb-6;
+  }
+}
+
+.view-session-plan-summary {
+  > div {
+    @include flex-center-vertical;
+    height: 46px;
+  }
+
+  a {
+    margin-right: auto;
+  }
+}
+
+.view-session-plan-objectives {
+  --border-style: 2px solid rgba(0, 0, 0, 0.05);
+  @apply bg-p2 shadow-lg;
+  table-layout: fixed;
+
+  tr:first-child th {
+    border-bottom: var(--border-style);
+  }
+
+  th,
+  td {
+    padding: .35rem .6rem;
+  }
+
+  th {
+    @apply bg-p3 text-p2;
+    font-weight: normal;
+  }
+}
+
+.view-session-plan-activity-row {
+  td:not(:first-child) {
+    border-left: var(--border-style);
+  }
+
+  td:not(:last-child) {
+    border-right: var(--border-style);
+  }
+
+  &:not(:last-child) td {
+    border-bottom: var(--border-style);
+  }
+}
+
+.view-session-plan-per {
+  background: rgba(0, 0, 0, .05);
+  border-radius: 3px;
+  display: inline-block;
+  font-size: .85rem;
+  font-weight: normal;
+  margin: .1rem;
+  padding: .25rem .5rem;
+}
+
+.view-session-sheet {
+  @apply p-5 mb-5 mx-auto;
+  max-width: 100%;
+  height: 277mm;
+  width: 210mm;
+
+  header {
+    @apply mb-4;
+  }
+
+  h1 {
+    @apply mb-0;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  h1 + div {
+    @apply mb-2;
+  }
+
+  h2 {
+    @apply bg-slate-700 text-white py-2 px-4 -mt-4 -mx-4;
+    display: block;
+  }
+
+  h3 {
+    @apply text-lg bg-slate-100 py-1 px-2 mb-2;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  section {
+    @apply mb-6 bg-slate-50 p-4 shadow-lg;
+    position: relative;
+  }
+
+  ul {
+    @apply pl-8 mb-4;
+    list-style-type: disc;
+  }
+
+  a {
+    @apply text-fuchsia-700;
+
+    &:hover {
+      @apply bg-fuchsia-700 text-white;
+      text-decoration: none;
+    }
+  }
+
+  img {
+    @apply my-1 mx-auto;
+    display: block;
+    max-width: 80%;
+  }
+
+  iframe {
+    @apply mx-auto;
+  }
+}
+
+.view-session-sheet-download {
+  @include absolute(8px, 6px, null, null);
+
+  a {
+    @apply bg-p3 py-1 px-2 text-p2;
+    display: block;
+
+    &:hover {
+      @apply bg-fuchsia-700;
+    }
+  }
+}
+
+.view-session-sheet-resources a {
+  @apply bg-fuchsia-700 text-white px-4 py-2 shadow-md mb-1;
+  display: inline-block;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &::before {
+    content: "\f15b";
+    font: var(--fa-font-solid);
+    margin-right: 0.5rem;
+  }
+}

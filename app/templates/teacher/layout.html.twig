@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'components/confirm-dialog.html.twig' with {id: 'confirm-dialog'} %}
+    {% include 'components/dialog.html.twig' %}
+
+    <div class="teacher-main">
+        <header class="flex items-center justify-end w-full mb-10">
+            {% block layoutHeader %}{% endblock %}
+            <div class="mpw-logo ml-4"></div>
+        </header>
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

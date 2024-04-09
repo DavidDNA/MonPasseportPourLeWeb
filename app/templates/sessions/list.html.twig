@@ -1,0 +1,25 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% block content %}
+    <div class="view-session-list">
+        <div class="flex items-center">
+            <h1 class="mb-0">{{ 'session.list.title' | trans }}</h1>
+            <ul class="text-right ml-auto">
+                <li><a class="button button-positive"
+                       href="{{ path('session_new') }}">{{ 'session.list.create' | trans }}</a></li>
+            </ul>
+        </div>
+        <div class="table my-6">
+            {% for session in sessions %}
+                <div>
+                    <a href="{{ path('session', {id: session.getId()}) }}">
+                        {{ session.getYearGroup.getName() | trans({}, 'yeargroup') }} - {{ session.getName() }}</a>
+                    {% set PER = session.getPER() %}
+                    <div class="ml-auto w-1/2">
+                        {% include 'components/per-list.html.twig' with {list: PER} %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

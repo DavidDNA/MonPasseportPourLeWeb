@@ -1,0 +1,12 @@
+{% extends 'components/confirm-dialog.html.twig' %}
+
+{% block message %}
+    <p class="mb-2">{{ 'classroom.confirm_dialog.remove_session_message' | trans }}</p>
+    <div class="text-center">
+        <p class="mb-2">{{ 'classroom.confirm_dialog.delete_message.instructions' | trans }}</p>
+        <input data-confirm-dialog-target="confirmInput"
+               data-action="keyup->confirm-dialog#onConfirmInputUp"
+               data-confirm-word="{{ 'classroom.confirm_dialog.delete_message.word' | trans }}"
+               type="text"/>
+    </div>
+{% endblock %}

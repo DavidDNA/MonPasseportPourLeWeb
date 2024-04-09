@@ -1,0 +1,125 @@
+@import "../mixin";
+
+/** --------------------------------------------------------
+ |
+ |  Passport
+ |
+ * -------------------------------------------------------- */
+.passport {
+  margin: auto;
+  width: calc(210mm - 3cm);
+
+  header {
+    align-items: center;
+    display: flex;
+    margin-bottom: 1.5rem;
+    margin-top: 15px;
+
+    img {
+      height: 85px;
+      margin-right: 1rem;
+    }
+
+    div {
+      @apply text-p3;
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.18;
+      margin-top: -9px;
+      width: 50%;
+    }
+  }
+}
+
+.passport-main {
+}
+
+.passport-text {
+  @apply text-p6;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.passport-identity {
+  @apply px-4 mb-4;
+  align-items: center;
+  display: flex;
+  float: right;
+  flex-direction: column;
+  padding-bottom: 30px;
+  position: relative;
+  width: 250px;
+}
+
+.passport-avatar {
+  @apply rounded-full bg-p8 border-p4;
+  border-style: solid;
+  border-width: 3px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 200px;
+  z-index: 1;
+
+  .avatar {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.passport-delivered-to {
+  @apply text-p4 mt-2;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+}
+
+.passport-nickname {
+  @apply border-b-2 border-dashed border-p4 mb-4;
+  display: block;
+  font-weight: bold;
+  max-width: 100%;
+  text-align: center;
+
+  &:focus {
+    @apply border-dashed;
+  }
+}
+
+.passport-nickname-indication {
+  @include absolute(null, 1rem, 0, 1rem);
+  animation: nickname-indication 1s infinite;
+}
+
+.passport-content {
+  @apply my-8;
+}
+
+.passport-session {
+  @apply space-x-2 my-2;
+  align-items: center;
+  display: flex;
+
+  .status {
+    flex: 0 0 20px;
+  }
+}
+
+.passport-grant {
+  clear: both;
+}
+
+@keyframes nickname-indication {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

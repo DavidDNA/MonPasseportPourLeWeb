@@ -1,0 +1,38 @@
+student.login.title: Mon Passeport pour le Web
+student.login.classroom.label: Classe
+student.login.classroom.error: Aucune classe trouvée pour ce code!
+student.login.box.heading: Connecte-toi à ton passport
+student.login.code.label: Entre le code de ta classe
+student.login.code.error: |
+  Ton code n'est pas valide!
+  Vérifie-le et vérifie la classe choisie.
+student.login.password.label: Entre ton code secret
+student.login.password.indications: Déplace les formes bleues sur les bonnes couleurs
+student.login.connect: Connexion
+student.main.title: Mon Passeport pour le Web
+student.main.refresh: Rafraichir ma progression
+student.main.logout: Me déconnecter
+student.main.progress.title: Résumé de ton aventure
+student.main.progress.subtitle: Tu as terminé %n% séances sur %t%!
+student.main.progress.detail: détails
+student.main.progress.passport.text: Félicitations! Tu as obtenu ton passeport pour le web!
+student.main.progress.passport.see: Voir mon passeport
+student.upgrade.title: Tu peux faire évoluer ton avatar!
+student.upgrade.subtitle: Choisis une nouvelle caractéristique
+student.upgrade.confirm: Valider
+student.upgrade.error: Oops! Une erreur est survenue pendant la validation de ton avatar! Essaie encore dans un instant.
+student.passport.print: Imprimer
+student.avatar.upgrade.corps: Corps
+student.avatar.upgrade.jambes: Jambes
+student.avatar.upgrade.bras: Bras
+student.avatar.upgrade.tete: Tête
+student.avatar.upgrade.oeil: Oeil
+student.avatar.upgrade.anim: Animation
+student.avatar.upgrade.bg: Fond
+student.avatar.upgrade.sol: Sol
+student.avatar.upgrade.decor: Décor
+student.avatar.upgrade.env: Environnement
+student.avatar.upgrade.chapeau: Chapeau
+student.avatar.upgrade.corps-item: Accessoire corps
+student.avatar.upgrade.tete-item: Accessoire tête
+student.avatar.upgrade.chapeau-item: Accessoire chapeau

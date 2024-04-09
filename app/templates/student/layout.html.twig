@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'components/dialog.html.twig' %}
+
+    <div class="student">
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}

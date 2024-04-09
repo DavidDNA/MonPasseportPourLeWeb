@@ -1,0 +1,7 @@
+{% for flash in app.flashes('success') %}
+    {% include 'components/alert.html.twig' with {type: 'success', message: flash} %}
+{% endfor %}
+
+{% for flash in app.flashes('error') %}
+    {% include 'components/alert.html.twig' with {type: 'error', message: flash} %}
+{% endfor %}

@@ -1,0 +1,24 @@
+@media print {
+
+  .view-classroom-print-head {
+    a {
+      display: none;
+    }
+  }
+
+  .view-classroom-print-actions {
+    display: none;
+  }
+
+  .view-classroom-print-list {
+    page-break-after: always;
+  }
+
+  .teacher-main > header {
+    display: none !important;
+  }
+
+  .view-classroom-print-item {
+    page-break-inside: avoid;
+  }
+}

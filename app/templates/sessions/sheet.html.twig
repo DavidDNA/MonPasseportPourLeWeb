@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="view-session-sheet">
+        <header>
+            <h1>{{ session.getTitle() }}</h1>
+            <div class="text-center">
+                <span class="text-sm font-normal">{{ session.getYearGroup().getName() | trans({}, 'yeargroup') }}</span>
+            </div>
+            <div class="text-center">
+                {% include 'components/per-list.html.twig' with {list: session.getPER()} %}
+            </div>
+        </header>
+        <section>
+            <h2>🎯 {{ 'session.detail.objectives' | trans }}</h2>
+            <div>{{ session.getObjectives() | raw }}</div>
+        </section>
+        <section>
+            <h2>📚 {{ 'session.detail.material' | trans }}</h2>
+            <div>{{ session.getMaterial() | raw }}</div>
+            {% if session.getMaterialUrl() is not empty %}
+                <div class="view-session-sheet-download">
+                    <a href="{{ session.getMaterialUrl() }}"
+                       target="_blank">🔗 {{ 'session.detail.download' | trans }}</a>
+                </div>
+            {% endif %}
+        </section>
+        <section>
+            <h2>👩‍🏫 {{ 'session.detail.teacher_indications' | trans }}</h2>
+            <div>{{ session.getTeacherIndications() | raw }}</div>
+        </section>
+        {% for activity in session.getActivities() %}
+            <section>
+                <h2>
+                    ✏️ {{ activity.getTitle() }} {% if activity.getDuration() is not empty %}({{ activity.getDuration() }}){% endif %}</h2>
+                {% set resources = activity.getResources() %}
+                {% if resources|striptags is not empty %}
+                    <div class="mb-6">
+                        <h3>{{ 'session.detail.activity.resources' | trans }}</h3>
+                        <div class="view-session-sheet-resources">{{ resources | raw }}</div>
+                    </div>
+                {% endif %}
+                <h3>{{ 'session.detail.activity.flow' | trans }}</h3>
+                <div class="view-session-sheet-content">{{ activity.getContent() | raw }}</div>
+            </section>
+        {% endfor %}
+        <section>
+            <div>{{ session.getSummary() | raw }}</div>
+        </section>
+        <div class="h-8"></div>
+    </div>
+{% endblock %}

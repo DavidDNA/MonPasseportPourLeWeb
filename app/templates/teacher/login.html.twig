@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'components/footer.html.twig' %}
+    <div class="teacher-login-view">
+        {% include 'components/animation.html.twig' with {id: 'login-animation', class: 'teacher-login-animation'} %}
+
+        <div class="teacher-login">
+            <div class="teacher-login-heading">
+                {% include 'components/animation.html.twig' with {id: 'logo', class: 'teacher-login-logo'} %}
+                <h1>{{ 'teacher.login.title' | trans }}</h1>
+            </div>
+
+            {% include 'teacher/components/flashes.html.twig' %}
+
+            {% if error %}
+                <div class="alert alert-error mb-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <div class="box mb-8">
+
+                <form class="form-vertical" action="{{ path('teacher_main') }}" method="post">
+                    <div class="form-field">
+                        <label for="username">{{ 'teacher.login.email' | trans }}</label>
+                        <input type="text" id="username" name="_username">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="password">{{ 'teacher.login.password' | trans }}</label>
+                        <input type="password" id="password" name="_password">
+                    </div>
+
+                    <div>
+                        <button class="button"
+                                type="submit"
+                                data-controller="btn-loading">{{ 'teacher.login.action' | trans }}</button>
+                    </div>
+                </form>
+            </div>
+            <ul class="text-center">
+                <li><a href="{{ path('teacher_new') }}">{{ 'teacher.login.create' | trans }}</a></li>
+                <li><a href="{{ path('teacher_recovery') }}">{{ 'teacher.login.recovery' | trans }}</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

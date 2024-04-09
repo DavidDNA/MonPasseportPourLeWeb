@@ -1,0 +1,100 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% block content %}
+    {% set mode = mode|default('grid') %}
+    <div class="view-classroom-print">
+        <div class="view-classroom-print-head">
+            <a href="{{ path("teacher_classroom", {id: classroom.getId()}) }}">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <h1>{{ 'classroom.print.title' | trans({'%code%': classroom.getCode()}) }}
+                <span class="view-classroom-detail-yeargroup">{{ classroom.getYearGroup().getName() | trans({}, 'yeargroup') }}</span>
+            </h1>
+            <div class="view-classroom-print-actions">
+                <div class="view-classroom-print-mode">
+                    <div>{{ ('classroom.print.mode.' ~ mode) | trans }} <i class="fa fa-caret-down ml-2"></i></div>
+                    <ul>
+                        {% if mode != 'grid' %}
+                            <li><a href="{{ path('teacher_classroom_print', {id: classroom.getId(), mode: 'grid'}) }}">
+                                    {{ 'classroom.print.mode.grid' | trans }}</a></li>
+                        {% endif %}
+                        {% if mode != 'list' %}
+                            <li><a href="{{ path('teacher_classroom_print', {id: classroom.getId(), mode: 'list'}) }}">
+                                    {{ 'classroom.print.mode.list' | trans }}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <button class="button button-positive" data-controller="print" data-action="print#print">
+                    <i class="fa fa-print"></i> {{ 'classroom.print.action' | trans }}
+                </button>
+            </div>
+        </div>
+
+        <div{% if mode == 'grid' %} class="print-only"{% endif %}>
+            <h2>{{ 'classroom.print.list_title' | trans }}</h2>
+            <div class="view-classroom-print-list">
+                <div class="view-classroom-print-list-table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="view-classroom-print-label">{{ 'classroom.print.id' | trans }}</th>
+                            <th class="view-classroom-print-label">{{ 'classroom.print.name' | trans }}</th>
+                            <th class="view-classroom-print-label">{{ 'classroom.print.password' | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in classroom.getStudents() %}
+                            {% if student.isEnabled() %}
+                                <tr class="view-classroom-print-item">
+                                    <td>{{ 'classroom.print.student' | trans({'%index%': loop.index}) }}</td>
+                                    <td class="view-classroom-print-input"></td>
+                                    <td>
+                                        {% include 'components/student-password.html.twig' with {password: student.getPassword()} %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="view-classroom-print-list-footer">
+                    <span class="font-bold">{{ 'classroom.print.access' | trans }}:</span>
+                    {{ absolute_url(path('student_login_with_classroom', {code: classroom.getCode()})) }}
+                </div>
+            </div>
+        </div>
+
+        <div{% if mode == 'list' %} class="print-only"{% endif %}>
+            <h2>{{ 'classroom.print.grid_title' | trans }}</h2>
+            <div class="view-classroom-print-grid">
+                {% for student in classroom.getStudents() %}
+                    {% if student.isEnabled() %}
+                        <div class="view-classroom-print-item">
+                            <div class="view-classroom-print-field">
+                                <div class="view-classroom-print-label">{{ 'classroom.print.id' | trans }}</div>
+                                <div>{{ 'classroom.print.student' | trans({'%index%': loop.index}) }}</div>
+                            </div>
+                            <div class="view-classroom-print-field">
+                                <div class="view-classroom-print-label">{{ 'classroom.print.name' | trans }}</div>
+                                <div class="view-classroom-print-input"></div>
+                            </div>
+                            <div class="view-classroom-print-field">
+                                <div class="view-classroom-print-label">{{ 'classroom.print.password' | trans }}</div>
+                                <div>{% include 'components/student-password.html.twig' with {password: student.getPassword()} %}</div>
+                            </div>
+                            <div class="view-classroom-print-field break">
+                                <div class="view-classroom-print-label text-center">{{ 'classroom.print.access' | trans }}</div>
+                                <div class="text-center">{{ absolute_url(path('student_login_with_classroom', {code: classroom.getCode()})) }}</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% block stylesheets %}
+        {{ parent() }}
+        {{ encore_entry_link_tags('print') }}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'teacher/layout.html.twig' %}
+
+{% block layoutHeader %}
+    <ul class="teacher-menu">
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <li><a class="button{% if route == 'sessions' or route == 'session' %} active{% endif %}"
+                   href="{{ path('sessions') }}">{{ 'teacher.menu.sessions' | trans }}</a></li>
+        {% endif %}
+        <li><a class="button{% if route == 'teacher_classrooms' or route == 'teacher_classroom' %} active{% endif %}"
+               href="{{ path('teacher_classrooms') }}">{{ 'teacher.menu.classrooms' | trans }}</a></li>
+        <li><a class="button{% if route == 'teacher_help' %} active{% endif %}"
+               href="{{ path('teacher_help') }}">{{ 'teacher.menu.help' | trans }}</a></li>
+        <li><a class="button{% if route == 'teacher_account' %} active{% endif %}"
+               title="{{ 'teacher.menu.account' | trans }}"
+               href="{{ path('teacher_account') }}">
+                <i class="fa fa-user"></i>
+            </a></li>
+        <li><a class="button" href="{{ path('app_logout') }}" title="{{ 'teacher.menu.logout' | trans }}">
+                <i class="fa fa-sign-out"></i>
+            </a></li>
+    </ul>
+{% endblock %}

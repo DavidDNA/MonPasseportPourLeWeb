@@ -1,0 +1,32 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% block content %}
+    <div class="teacher-help">
+        <h1>{{ 'teacher.menu.help' | trans }}</h1>
+        <div class="box">
+            <section class="mb-8">
+                <h2>🎬 {{ 'teacher.help.presentation' | trans }}</h2>
+                <iframe width="100%" height="360" src="https://tube.switch.ch/embed/BZlQkxhMiF?title=hide"
+                        frameborder="0" allow="fullscreen"></iframe>
+            </section>
+
+            <section class="mb-8">
+                <h2>🎬 {{ 'teacher.help.usage' | trans }}</h2>
+                <iframe width="100%" height="360" src="https://tube.switch.ch/embed/R4J5AZLRuf?title=hide"
+                        frameborder="0" allow="fullscreen"></iframe>
+            </section>
+
+            <section>
+                <h2>📝 {{ 'teacher.help.foundation' | trans }}</h2>
+                <p>
+                    <a href="{{ asset('docs/fondements.pdf') }}" target="_blank">
+                        {{ 'teacher.help.foundation.link' | trans }}
+                    </a>
+                </p>
+                <p>
+                    <a href="https://github.com/DavidDNA/MonPasseportPourLeWeb">{{ 'teacher.help.foundation.source' | trans }}</a>
+                </p>
+            </section>
+        </div>
+    </div>
+{% endblock %}

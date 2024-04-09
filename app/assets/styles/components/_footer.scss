@@ -1,0 +1,7 @@
+@import "../mixin";
+
+.footer {
+  @include absolute(null, 0, 0, 0);
+  @apply flex items-center justify-end text-p6 py-2 px-4;
+  z-index: 1;
+}

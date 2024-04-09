@@ -1,0 +1,10 @@
+<div id="{{ id }}" class="{{ class }}"></div>
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById("{{ id }}"),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('build/animations/' ~ id ~ '.json') }}'
+    });
+</script>

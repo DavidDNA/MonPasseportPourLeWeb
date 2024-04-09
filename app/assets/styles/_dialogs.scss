@@ -1,0 +1,131 @@
+@import "mixin";
+
+.dialog {
+  @apply flex items-center justify-center;
+  @include fixed;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 100;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+
+    .dialog-loading {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  &.loaded .dialog-loading {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.dialog-loading {
+  @include absolute;
+  @include flex-center-full;
+  background: rgba(255, 255, 255, .25);
+  transition: opacity .5s ease;
+}
+
+.dialog-inner {
+  @apply bg-white rounded-lg;
+  min-height: 150px;
+  min-width: 300px;
+  max-width: 90%;
+  position: relative;
+}
+
+.dialog-button {
+  @apply text-xl bg-white rounded-full w-10 h-10 shadow;
+  transition: transform .25s ease;
+  z-index: 1;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.dialog-print {
+  @include absolute(-1rem, 5rem, null, null);
+}
+
+.dialog-fullscreen {
+  @include absolute(-1rem, 2rem, null, null);
+}
+
+.dialog-close {
+  @include absolute(-1rem, -1rem, null, null);
+}
+
+.dialog-back {
+  @include absolute(-1rem, null, null, -1rem);
+  pointer-events: none;
+  transform: scale(0);
+  transition: transform .25s ease;
+
+  &.visible {
+    pointer-events: all;
+    transform: scale(1);
+  }
+}
+
+// offset controls when the dialog is fullscreen
+.dialog.fullscreen {
+
+  .dialog-print {
+    top: .5rem;
+    right: 8rem;
+  }
+
+  .dialog-fullscreen {
+    top: .5rem;
+    right: 5rem;
+  }
+
+  .dialog-close {
+    top: .5rem;
+    right: 2rem;
+  }
+
+  .dialog-back {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .dialog-content {
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+.dialog-title {
+  @apply text-xl font-bold text-center;
+}
+
+.dialog-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width .5s ease, height .5s ease;
+}
+
+.dialog-message {
+  @apply my-4;
+}
+
+.dialog-actions {
+  @apply flex items-center justify-center space-x-2;
+}
+
+.confirm-dialog .dialog-inner {
+  max-width: min(90%, 450px);
+}

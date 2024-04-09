@@ -1,0 +1,9 @@
+@media print {
+  .portfolio {
+    padding: 0 !important;
+  }
+
+  .portfolio-block:not(:last-child) {
+    page-break-after: always;
+  }
+}

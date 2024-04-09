@@ -1,0 +1,38 @@
+.form-field {
+  @apply mb-2;
+}
+
+.form-horizontal {
+  .form-field {
+    @apply flex items-center space-x-2;
+
+    label {
+      @apply w-1/4;
+    }
+
+    input {
+      @apply w-3/4;
+    }
+  }
+}
+
+.form-vertical {
+  .form-field {
+    label {
+      @apply block;
+    }
+
+    input {
+      @apply block w-full;
+    }
+  }
+}
+
+.error {
+  @apply text-p6;
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold;
+}

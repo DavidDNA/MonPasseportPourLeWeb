@@ -1,0 +1,57 @@
+{% extends 'teacher/layout.html.twig' %}
+
+{% form_theme form with [
+    'form/form-theme.html.twig'
+] %}
+
+{% block content %}
+    {% if classroomCreated is not null %}
+        <div class="view-classroom-wizard">
+            <h2>{{ (onboarding ? 'classroom.create.onboarding.title' : 'classroom.create.title') | trans }}</h2>
+            <h1>{{ 'classroom.create.confirmation.title' | trans }}</h1>
+            <ul>
+                <li>
+                    <a href="{{ path('teacher_classroom', {id: classroomCreated.getId()}) }}">{{ 'classroom.create.confirmation.details' | trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('teacher_classroom_print', {id: classroomCreated.getId()}) }}">{{ 'classroom.create.confirmation.accesses' | trans }}</a>
+                </li>
+                <li><a href="{{ path('teacher_classrooms') }}">{{ 'classroom.create.confirmation.list' | trans }}</a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        {% set step = flow.getCurrentStepNumber() %}
+        <div class="view-classroom-wizard view-classroom-wizard-step-{{ step }}">
+            <h2>{{ (onboarding ? 'classroom.create.onboarding.title' : 'classroom.create.title') | trans }}</h2>
+            <h1>{{ ('classroom.create.step.' ~ step ~ '.title') | trans }}</h1>
+
+            {% if step == 1 %}
+                <p>{{ 'classroom.create.step.1.subtitle' | trans }}</p>
+            {% endif %}
+
+            <div class="view-classroom-wizard-form">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+                <div class="view-classroom-wizard-form-fields">
+                    {% if step == 2 %}
+                        {{ form_widget(form.sessions, {'attr': {'data-controller': 'classroom-new-sessions', 'data-group-name': 'group-name'} }) }}
+                        <div class="my-2 border"></div>
+                    {% endif %}
+
+                    {{ form_rest(form) }}
+                </div>
+
+                {% include '@CraueFormFlow/FormFlow/buttons.html.twig' with {
+                    craue_formflow_button_render_reset: false
+                } %}
+                {{ form_end(form) }}
+            </div>
+            <div class="view-classroom-wizard-footer">
+                <a href="{{ path('teacher_classrooms') }}">{{ (onboarding ? 'classroom.create.onboarding.cancel' : 'classroom.create.cancel') | trans }}</a>
+                <a href="{{ path('teacher_help') }}" target="_blank">{{ 'classroom.create.help' | trans }}</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

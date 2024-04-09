@@ -1,0 +1,30 @@
+<div id="dialog"
+     class="dialog"
+     data-controller="dialog"
+     data-action="keydown.esc->dialog#close"
+     tabindex="0">
+    <div class="dialog-inner"
+         data-dialog-target="inner">
+        <button class="dialog-button dialog-back"
+                data-dialog-target="back"
+                data-action="dialog#back">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+        <button class="dialog-button dialog-print"
+                data-action="dialog#print">
+            <i class="fa fa-print"></i>
+        </button>
+        <button class="dialog-button dialog-fullscreen"
+                data-action="dialog#toggleFullscreen">
+            <i class="fa fa-expand"></i>
+        </button>
+        <button class="dialog-button dialog-close"
+                data-action="dialog#close">
+            <i class="fa fa-times"></i>
+        </button>
+        <div class="dialog-loading">
+            {% include 'components/loading-spinner.html.twig' %}
+        </div>
+        <div class="dialog-content scrollbar"></div>
+    </div>
+</div>

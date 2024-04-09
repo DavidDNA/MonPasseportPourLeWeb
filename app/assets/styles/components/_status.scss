@@ -1,0 +1,41 @@
+@mixin status-icon($icon) {
+  &.status-icon,
+  .status-icon {
+    background-image: url('../../images/icons/icone-#{$icon}.svg');
+    background-origin: content-box;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.status {
+  --status-size: 1.25rem;
+  align-items: center;
+  display: inline-flex;
+  height: var(--status-size);
+  justify-content: center;
+  padding: .25rem;
+  width: var(--status-size);
+
+  img {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+}
+
+.status-todo {
+  @apply bg-p4;
+  @include status-icon('cadenas');
+}
+
+.status-in_progress {
+  @apply bg-p9;
+  @include status-icon('roue');
+}
+
+.status-done {
+  @apply bg-p5;
+  @include status-icon('vu');
+}

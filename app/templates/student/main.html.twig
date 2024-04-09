@@ -1,0 +1,93 @@
+{% extends 'student/layout.html.twig' %}
+{% trans_default_domain 'student' %}
+
+{% block bodyClasses %}{% endblock %}
+
+{% block body %}
+    {% include 'components/dialog.html.twig' %}
+    {% if upgrade is not empty %}
+        {% include 'student/components/upgrade-dialog.html.twig' with {student: student, upgrade: upgrade, upgradesi18n: upgradesi18n} %}
+    {% endif %}
+    {% set relativeProgression = student.getRelativeProgression() * 100 %}
+    {% set unlocked = (relativeProgression == 100) %}
+
+    <div class="student-main">
+        <div class="student-main-left">
+            <div class="student-main-left-title{% if unlocked %} unlocked{% endif %}">
+                {{ 'student.main.title' | trans }}
+                {% if unlocked %}
+                    <img src="{{ asset('build/images/icons/icone-vu.svg') }}"/>
+                {% else %}
+                    <img src="{{ asset('build/images/icons/icone-cadenas.svg') }}"/>
+                {% endif %}
+            </div>
+
+            <div class="student-main-left-avatar">
+                {{ avatar(student.Avatar) }}
+            </div>
+
+            <div class="student-main-left-progress">
+                <div class="student-main-progress-mask{% if unlocked %} full{% endif %}"
+                     style="top: calc(80px + {{ 100 - relativeProgression }}%)">
+                    {% include 'components/animation.html.twig' with {id: 'pixels', class: 'student-main-progress-mask-pixels'} %}
+                </div>
+                <div class="student-main-progress-number">{{ relativeProgression|number_format(0) }}%</div>
+                <div class="student-main-left-controls">
+                    <a class="button button-warning"
+                       href="{{ path('student_main') }}">{{ 'student.main.refresh' | trans }}</a>
+                    <a class="button button-negative"
+                       href="{{ path('student_logout') }}">{{ 'student.main.logout' | trans }}</a>
+                </div>
+
+                <div class="student-main-progress-bar">
+                    {% for upgrade in upgrades %}
+                        <div class="student-main-progress-upgrade"
+                             style="bottom: min({{ upgrade.getRelativeThreshold() * 100 }}%, calc(100% - 12px))">
+                            {% if student.getAvatar().hasUpgrade(upgrade.getName()) %}
+                                <img src="{{ asset('build/images/icons/icone-vu.svg') }}"/>
+                            {% else %}
+                                <img src="{{ asset('build/images/icons/icone-etoile.svg') }}"/>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="student-main-progress-bar-fill"
+                         style="height: {{ relativeProgression }}%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="student-main-right">
+            <div class="student-main-logo mpw-logo"></div>
+            <h1>{{ 'student.main.progress.title' | trans }}</h1>
+            <div class="student-main-progress-subtitle">
+                {{ 'student.main.progress.subtitle' | trans({'%n%': student.getDoneSessionsAmount(), '%t%': student.getProgression()|length}) }}
+            </div>
+            <ul>
+                {% for progression in student.getProgression() %}
+                    {% set session = progression.getSession() %}
+                    <li class="student-main-progress-item status-{{ progression.getStatus()|lower }}">
+                        <span class="status status-icon"></span>
+                        <span class="student-main-progress-item-title">{{ session.getTitle() }}</span>
+                        {% if session.getStudentResources() is not empty and progression.getStatus() != "todo" %}
+                            <button class="button"
+                                    data-controller="dialog-control"
+                                    data-action="dialog-control#open"
+                                    data-action="dialog-control#open"
+                                    data-dialog-control-url-param="{{ path('session_student_resources', {id: session.getId()}) }}">
+                                {{ 'student.main.progress.detail' | trans }}
+                            </button>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if unlocked %}
+                <div class="student-main-progress-passport">
+                    <p>{{ 'student.main.progress.passport.text' | trans }}</p>
+                    <a class="button" href="{{ path('student_passport') }}">
+                        {{ 'student.main.progress.passport.see' | trans }}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

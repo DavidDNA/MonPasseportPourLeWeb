@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="home text-center">
+        <div>
+            {% include 'components/animation.html.twig' with {id: 'logo', class: 'home-logo mb-4'} %}
+            <h1 class="mb-8">{{ 'home.title' | trans }}</h1>
+
+            <div class="flex items-center justify-center space-x-2">
+                <a href="{{ path('teacher_main') }}">{{ 'home.teacher' | trans }}</a>
+                <span class="font-bold">ou</span>
+                <a href="{{ path('student_login') }}">{{ 'home.student' | trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

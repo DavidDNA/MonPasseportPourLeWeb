@@ -1,0 +1,158 @@
+@import "../mixin";
+
+.teacher-login-view {
+  align-items: stretch;
+  display: flex;
+  min-height: 100vh;
+}
+
+.teacher-login-animation {
+  align-items: flex-start;
+  display: flex;
+  transition: transform .5s ease;
+
+  svg {
+    max-height: 100vh;
+    height: auto !important;
+    width: 100% !important;
+  }
+}
+
+.teacher-new,
+.teacher-login,
+.teacher-password-recovery {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 350px;
+  width: 90%;
+}
+
+.teacher-new {
+  max-width: unset;
+}
+
+.teacher-new-wrapper {
+  margin: 0 auto;
+  max-width: 350px;
+}
+
+.teacher-new-warning {
+  margin: 0 auto 2rem auto;
+  max-width: 600px;
+}
+
+.teacher-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.teacher-login-heading {
+  text-align: center;
+
+  > h1 {
+    @apply mb-8;
+  }
+}
+
+.teacher-login-logo {
+  @apply mb-4 mx-auto;
+  height: auto;
+  display: block;
+  max-width: 85%;
+  width: 450px;
+}
+
+.teacher-new-password > div:first-child {
+  margin-bottom: .5rem;
+}
+
+.teacher-new-terms {
+  align-items: center;
+  display: flex;
+  line-height: 1.1;
+
+  .checkbox {
+    margin-right: 1rem;
+  }
+}
+
+.teacher-terms {
+  --margin-unit: .75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 1rem;
+  margin: 0 auto;
+  max-width: 850px;
+  width: 90%;
+
+  .teacher-login-heading {
+    margin: 0 auto;
+    max-width: 350px;
+  }
+
+  p {
+    margin-bottom: var(--margin-unit);
+  }
+
+  h2 {
+    margin: calc(2 * var(--margin-unit)) 0 var(--margin-unit) 0;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-bottom: var(--margin-unit);
+    margin-left: 2rem;
+  }
+}
+
+.teacher-password-recovery h1 {
+  text-align: center;
+}
+
+.teacher-main {
+  @apply max-w-6xl mx-auto p-4;
+  width: 90%;
+}
+
+.teacher-menu {
+  @apply flex items-center space-x-2;
+
+  .active {
+    @apply bg-p9 border-p9;
+
+    &:hover {
+      @apply bg-p9 bg-white;
+    }
+  }
+}
+
+.teacher-student-details {
+  @apply p-5;
+  max-width: 90%;
+  width: 400px;
+}
+
+.teacher-feedback-row {
+  @apply mb-4;
+  display: flex;
+
+  label {
+    font-weight: bold;
+  }
+
+  > div:first-child {
+    flex: 0 0 25%;
+  }
+
+  > div:nth-child(2) {
+    flex-grow: 1;
+  }
+}
+
+.teacher-help h2 {
+  font-weight: 500;
+}

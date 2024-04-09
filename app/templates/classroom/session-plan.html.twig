@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="view-session-plan">
+        <h1>{{ 'classroom.session_plan.title' | trans({'%code%': classroom.getCode()}) }}</h1>
+
+        {% if viewMode() != 'print' %}
+            <div class="view-session-plan-summary table">
+                {% for relation in classroom.getSessions() %}
+                    {% set session = relation.getSession() %}
+                    <div>
+                        <a href="{{ path('session_detail', {id: session.getId()}) }}" data-dialog-route>
+                            #{{ loop.index }} {{ session.getTitle() }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h2>{{ 'classroom.session_plan.objectives' | trans({'%code%': classroom.getCode()}) }}</h2>
+        {% endif %}
+
+        <table class="view-session-plan-objectives">
+            <tr>
+                <th class="text-left text-lg" colspan="4">
+                    {{ classroom.getYearGroup().getName() | trans({}, 'yeargroup') }}
+                </th>
+            </tr>
+            <tr>
+                <th colspan="4">
+                    <div class="flex">
+                        <div class="w-1/2">{{ 'classroom.session_plan.activities' | trans }}</div>
+                        <div class="w-1/2">{{ 'classroom.session_plan.PER' | trans }}</div>
+                    </div>
+                </th>
+            </tr>
+            {% for relation in classroom.getSessions() %}
+                {% set session = relation.getSession() %}
+                <tr>
+                    <th class="text-center" colspan="4"
+                        style="background: {{ session.getPERMainColor() }}; color: {{ session.getPERTextColor() }}">
+                        {{ 'classroom.session_plan.session' | trans({'%n%': '#' ~ loop.index}) }}<br/>
+                        {{ session.getTitle() }}<br/>
+                        <div class="text-center">
+                            {% for item in session.getPER() %}
+                                {% if item is not empty %}
+                                    <span class="view-session-plan-per">{{ item }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </th>
+                </tr>
+                {% for activity in session.getActivities() %}
+                    <tr class="view-session-plan-activity-row">
+                        <td class="w-1/6 text-center">
+                            {{ 'classroom.session_plan.activity' | trans({'%n%': '#' ~ loop.index}) }}
+                        </td>
+                        <td class="w-1/6 text-center">{{ activity.getDuration() }}</td>
+                        <td class="w-1/6 text-center">{{ activity.getTitle() }}</td>
+                        {% if loop.index == 1 %}
+                            <td class="w-1/2 align-top" rowspan="{{ session.getActivities() | length }}">
+                                {{ session.getPERObjectives() | raw }}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+

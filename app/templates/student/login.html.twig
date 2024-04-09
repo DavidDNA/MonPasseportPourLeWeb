@@ -1,0 +1,125 @@
+{% extends 'student/layout.html.twig' %}
+{% trans_default_domain 'student' %}
+
+{% block body %}
+    {% include 'components/footer.html.twig' %}
+
+    <div class="student-login"
+         data-controller="student-login"
+         data-student-login-maxlength-value="4"
+         data-student-login-code-value="{{ code | default('') }}"
+         data-student-login-url-value="{{ path('student_login_classroom_check', {code: 'code'}) }}">
+
+        <div class="student-login-intro">
+            <div>
+                <img src="{{ asset('build/images/mpw.svg') }}" alt="Logo MPW"/>
+                <div class="text-white">{{ 'student.login.title' | trans }}</div>
+            </div>
+        </div>
+
+        <div class="student-login-door student-login-door-left"></div>
+        <div class="student-login-door student-login-door-right"></div>
+
+        {% include 'components/animation.html.twig' with {id: 'login-animation', class: 'student-login-animation'} %}
+
+        <div class="student-login-main">
+            <div class="student-login-box-heading">
+                {% include 'components/animation.html.twig' with {id: 'logo', class: 'student-login-logo'} %}
+                <h1>{{ 'student.login.box.heading' | trans }}</h1>
+            </div>
+            <div class="student-login-box">
+                <button class="button button-warning student-login-box-back"
+                        data-action="click->student-login#clearClassroom">
+                    <i class="fa fa-caret-left"></i>
+                </button>
+
+                <div class="student-login-box-loading">
+                    {% include 'components/loading-spinner.html.twig' %}
+                </div>
+
+                <div class="student-login-box-classroom">
+                    <div>{{ 'student.login.classroom.label' | trans }} <span
+                                data-student-login-target="classroomCode"></span></div>
+                </div>
+
+                <div class="student-login-box-inner">
+                    <div class="student-login-box-steps">
+                        <div class="student-login-box-step">
+                            <h2>{{ 'student.login.code.label' | trans }}</h2>
+                            <div class="student-login-code-input">
+                                <input type="text"
+                                       name="classroom-code"
+                                       data-action="keydown.enter->student-login#selectClassroom"
+                                       data-student-login-target="inputClassroom">
+                                <button type="button"
+                                        data-action="click->student-login#selectClassroom">
+                                    <img src="{{ asset('build/images/icons/icone-vu.svg') }}">
+                                </button>
+                            </div>
+                            <div class="student-login-classroom-error">
+                                {{ 'student.login.classroom.error' | trans }}
+                            </div>
+                        </div>
+                        <div class="student-login-box-step">
+                            <h2>{{ 'student.login.password.label' | trans }}</h2>
+
+                            <div class="tooltip tooltip-right student-login-code-indications">
+                                {{ 'student.login.password.indications' | trans }}
+                            </div>
+
+                            <div class="student-login-code-error">
+                                {{ 'student.login.code.error' | trans | nl2br }}
+                            </div>
+
+                            <form action="{{ path('student_login') }}" method="post" data-student-login-target="form">
+                                <input type="hidden" name="classroom" data-student-login-target="classroomId" value=""/>
+                                <input type="hidden" name="password" data-student-login-target="inputValue"/>
+
+                                <div class="student-login-composer">
+                                    <div class="student-login-row">
+                                        <div class="student-password-shape student-password-square" data-shape="square"
+                                             draggable="true"></div>
+                                        <div class="student-password-shape student-password-circle" data-shape="circle"
+                                             draggable="true"></div>
+                                        <div class="student-password-shape student-password-triangle"
+                                             data-shape="triangle"
+                                             draggable="true"></div>
+                                        <div class="student-password-shape student-password-diamond"
+                                             data-shape="diamond"
+                                             draggable="true"></div>
+                                    </div>
+                                    <div class="student-login-row">
+                                        <div class="student-password-color student-password-yellow"
+                                             data-color="yellow"></div>
+                                        <div class="student-password-color student-password-red" data-color="red"></div>
+                                        <div class="student-password-color student-password-pink"
+                                             data-color="pink"></div>
+                                        <div class="student-password-color student-password-blue"
+                                             data-color="blue"></div>
+                                    </div>
+                                </div>
+
+                                <div class="student-login-input">
+                                    <div class="student-login-characters" data-student-login-target="inputView"></div>
+                                    <button type="button"
+                                            class="student-password-clear button button-negative"
+                                            data-action="click->student-login#clear">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+
+                                <div class="student-login-submit">
+                                    <button data-controller="btn-loading"
+                                            type="submit"
+                                            data-action="click->student-login#login"
+                                            class="button button-warning">{{ 'student.login.connect' | trans }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% block content %}
+    {% set blockStyle = 'bg-p2 p-6 mb-6 shadow-lg' %}
+
+    <div class="view-session-detail">
+        {{ form_start(form) }}
+
+        <div class="text-right mb-4">
+            <button class="button button-positive" type="submit">{{ 'session.detail.save' | trans }}</button>
+            {% if session.getId() is not null %}
+                <button type="button"
+                        class="button"
+                        data-controller="dialog-control"
+                        data-action="dialog-control#open"
+                        data-dialog-control-url-param="{{ path('session_detail', {id: session.getId()}) }}">
+                    {{ 'session.detail.preview' | trans }}
+                </button>
+            {% endif %}
+        </div>
+
+        <div class="{{ blockStyle }}">
+            <h2>{{ 'session.detail.general' | trans }}</h2>
+
+            <div class="grid grid-cols-2 gap-4">
+                {{ form_row(form.name) }}
+                {{ form_row(form.yearGroup) }}
+            </div>
+
+            <div>
+                {{ form_row(form.title) }}
+            </div>
+
+            <div class="grid grid-cols-3 gap-4">
+                {{ form_row(form.PER) }}
+                {{ form_row(form.PERMainColor) }}
+                {{ form_row(form.PERTextColor) }}
+            </div>
+
+            {{ form_row(form.PERObjectives) }}
+            {{ form_row(form.objectives) }}
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                {{ form_row(form.material) }}
+                {{ form_row(form.teacherIndications) }}
+            </div>
+
+            <div>
+                {{ form_row(form.materialUrl) }}
+            </div>
+        </div>
+
+        <h2>{{ 'session.detail.activities' | trans }}</h2>
+
+        <div class="{{ blockStyle }}">
+            <div {{ stimulus_controller('form-collection') }}
+                    data-form-collection-index-value="{{ form.activities|length > 0 ? form.activities|last.vars.name + 1 : 0 }}"
+                    data-form-collection-prototype-value="{{ form_widget(form.activities.vars.prototype)|e('html_attr') }}">
+                <div class="view-session-detail-activities" {{ stimulus_target('form-collection', 'collectionContainer') }}>
+                    {% for activity in form.activities %}
+                        <div>
+                            {{ form_widget(activity) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="text-right">
+                    <button class="button button-positive" {{ stimulus_action('form-collection', 'addCollectionElement') }}>
+                        {{ 'session.detail.activity.add' | trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="{{ blockStyle }}">
+            {{ form_rest(form) }}
+        </div>
+
+        <div class="text-right mb-4">
+            <button class="button button-positive" type="submit">{{ 'session.detail.save' | trans }}</button>
+        </div>
+
+        {{ form_end(form) }}
+
+        {% if deleteForm is defined %}
+            <div class="text-right">
+                {{ form_start(deleteForm) }}
+                <button type="submit"
+                        class="button button-negative"
+                        data-controller="confirm-dialog-control"
+                        data-confirm-dialog-control-id-param="confirm-dialog"
+                        data-action="confirm-dialog-control#open">{{ 'session.detail.delete' | trans }}</button>
+                {{ form_end(deleteForm) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <script>
+        function quilljs_textarea(selector = null, options = null) {
+            let elements;
+            if (selector) {
+                elements = Array.prototype.slice.call(document.querySelectorAll(selector));
+                console.warn(elements);
+            } else {
+                elements = Array.prototype.slice.call(document.querySelectorAll('[data-quilljs]'));
+            }
+            elements.forEach(function (el) {
+                const type = el.type;
+                let placeholder = null;
+                let container;
+                let defaults;
+                const theme = el.getAttribute('data-quilljs') || 'snow';
+
+                const toolbarOptions = [
+                    ['bold', 'italic', 'underline', 'link', 'clean'],
+                    [{'header': 2}],
+                    [{'list': 'bullet'}, {'list': 'ordered'}],
+                    [{'align': []}]
+                ];
+
+                if (type === 'textarea') {
+                    const value = el.value;
+                    container = document.createElement('div');
+                    container.innerHTML = value;
+                    el.parentNode.insertBefore(container, el.nextSibling);
+                    el.style.display = "none";
+                    placeholder = el.placeholder;
+                } else {
+                    container = el;
+                }
+                if (!options) {
+                    defaults = {
+                        theme: theme,
+                        modules: {
+                            toolbar: toolbarOptions
+                        },
+                        placeholder: placeholder
+                    };
+                } else {
+                    if (!options.placeholder) {
+                        options.placeholder = placeholder;
+                    }
+                    defaults = options;
+                }
+
+                const editor = new Quill(container, defaults);
+                editor.on('text-change', function () {
+                    el.value = editor.root.innerHTML;
+                });
+            });
+        }
+
+        var icons = Quill.import('ui/icons');
+        icons['clean'] = '<i class="fa-solid fa-broom"></i>';
+        quilljs_textarea();
+    </script>
+{% endblock %}

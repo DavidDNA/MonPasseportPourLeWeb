@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme registrationForm with [
+    'form/form-theme.html.twig'
+] %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="teacher-login-view">
+        <div class="teacher-new">
+            <div class="teacher-new-wrapper">
+                <div class="teacher-login-heading">
+                    <img class="mb-2" src="{{ asset('build/images/mpw.svg') }}"/>
+                    <h1>{{ 'teacher.create.title' | trans }}</h1>
+                </div>
+            </div>
+
+            <p class="alert alert-warning teacher-new-warning">
+                {{ 'teacher.create.warning' | trans }} <a href="mailto:create@hepfr.ch">create@hepfr.ch</a>
+            </p>
+
+            <div class="teacher-new-wrapper">
+                <div class="box mb-8">
+                    {% if created %}
+                        <div>{{ 'teacher.create.confirm' | trans }}</div>
+                    {% else %}
+                        {{ form_start(registrationForm, {attr: {class: 'form-vertical'}}) }}
+
+                        <div class="form-field">
+                            {{ form_row(registrationForm.email, {
+                                label: 'teacher.create.email'
+                            }) }}
+                        </div>
+
+                        <div class="teacher-new-password form-field">
+                            {{ form_row(registrationForm.password, {
+                                label: 'teacher.create.password'
+                            }) }}
+                            <p class="mb-2 mt-2 italic">{{ 'teacher.update.password.constraints' | trans }}</p>
+                        </div>
+
+                        <hr class="my-4"/>
+
+                        <div class="teacher-new-terms mb-2">
+                            {{ form_widget(registrationForm.agreeTerms) }}
+                            <label for="registration_form_agreeTerms">
+                                {{ 'teacher.create.terms' | trans }}
+                                <a href="{{ path('teacher_terms') }}" target="_blank">
+                                    {{ 'teacher.create.terms.link' | trans }}
+                                </a>
+                            </label>
+                        </div>
+
+                        <button class="button" type="submit" class="btn">{{ 'teacher.create.action' | trans }}</button>
+                        {{ form_end(registrationForm) }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="{{ path('teacher_main') }}">{{ 'teacher.create.back' | trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

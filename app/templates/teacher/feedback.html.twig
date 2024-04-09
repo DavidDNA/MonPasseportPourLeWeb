@@ -1,0 +1,39 @@
+{% extends 'teacher/layout-with-menu.html.twig' %}
+
+{% block content %}
+    <div class="teacher-feedback">
+        <h1>{{ 'teacher.feedback.title' | trans }}</h1>
+        {% include 'teacher/components/flashes.html.twig' %}
+
+        {% if sent == false %}
+            <div class="box">
+                {{ form_start(form) }}
+                <div class="teacher-feedback-row">
+                    <div><label>{{ 'teacher.feedback.mail' | trans }}</label></div>
+                    <div>{{ app.user.getEmail() }}</div>
+                </div>
+
+                <div class="teacher-feedback-row">
+                    <div>
+                        <div>{{ form_label(form.name) }}</div>
+                        <div>{{ form_errors(form.name) }}</div>
+                    </div>
+                    <div>{{ form_widget(form.name) }}</div>
+                </div>
+
+                <div class="teacher-feedback-row">
+                    <div>
+                        <div>{{ form_label(form.message) }}</div>
+                        <div>{{ form_errors(form.message) }}</div>
+                    </div>
+                    <div>{{ form_widget(form.message) }}</div>
+                </div>
+
+                <div class="text-right">
+                    <button class="button button-positive" type="submit">{{ 'teacher.feedback.send' | trans }}</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

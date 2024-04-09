@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="teacher-student-details" {{ stimulus_controller('student-details') }}>
+        <h1>{{ 'classroom.detail.student.title' | trans }} {{ classroom.getStudents().indexOf(student) + 1 }}</h1>
+        <div class="flex items-center">
+            <div class="w-1/2 font-bold">{{ 'classroom.detail.student.password' | trans }}</div>
+            <div class="w-1/2">
+                <div>{% include 'components/student-password.html.twig' with {password: student.getPassword()} %}</div>
+            </div>
+        </div>
+        <div class="flex items-center mb-2">
+            <div class="w-1/2 font-bold">{{ 'classroom.detail.student.progression' | trans }}</div>
+            <div class="w-1/2">{{ student.getSessionsDone() }}/{{ student.getProgression().count() }}</div>
+        </div>
+        <div class="flex items-center">
+            <div class="w-1/2"></div>
+            <div class="w-1/2">
+                {{ form_start(stateForm) }}
+                {% if student.isEnabled() %}
+                    <button type="submit" class="button button-negative">Désactiver</button>
+                {% else %}
+                    <button type="submit" class="button button-positive">Activer</button>
+                {% endif %}
+                {{ form_end(stateForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

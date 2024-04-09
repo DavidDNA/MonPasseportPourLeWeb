@@ -1,0 +1,126 @@
+@import "mixin";
+
+textarea,
+select,
+input {
+  @apply border-2 py-1 px-3;
+
+  &:not(:disabled) {
+    &:hover {
+      @apply border-slate-800 text-black;
+    }
+  }
+}
+
+input[type=checkbox] {
+  @apply bg-p3;
+  height: 20px;
+  width: 20px;
+}
+
+.checkbox {
+  --height: 20px;
+  --width: 20px;
+
+  cursor: pointer;
+  display: inline-block;
+  height: var(--height);
+  margin-right: .5rem;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: var(--width);
+
+  input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+}
+
+.checkbox-check {
+  @apply bg-p3 border-p3;
+  @include absolute;
+  border-style: solid;
+  border-width: 2px;
+  height: var(--height);
+  width: var(--width);
+
+  &:hover {
+    @apply bg-p2;
+
+    &:after {
+      @apply border-p3;
+    }
+  }
+
+  &:after {
+    @apply border-p2;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    content: "";
+    display: none;
+    height: 10px;
+    left: 6px;
+    position: absolute;
+    top: 2px;
+    transform: rotate(35deg);
+    width: 5px;
+  }
+}
+
+/** State: disabled */
+.checkbox.disabled {
+  pointer-events: none;
+
+  .checkbox-check {
+    opacity: .5;
+  }
+}
+
+
+/** State: checked */
+.checkbox input[type=checkbox]:checked ~ .checkbox-check {
+  @apply bg-p5 border-p5;
+
+  &:after {
+    display: block;
+  }
+}
+
+input[type="radio"] {
+  height: 18px;
+  width: 18px;
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+
+  &:after {
+    @apply bg-p7;
+  }
+}
+
+input[type="radio"]:after {
+  @apply bg-p4 border-2 border-p3;
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  height: 18px;
+  position: relative;
+  visibility: visible;
+  width: 18px;
+}
+
+input[type="radio"]:disabled:after {
+  background-color: rgb(235, 235, 235);
+  border-color: rgba(220, 220, 220);
+}
+
+input[type="radio"]:checked:after {
+  @apply bg-p5;
+}

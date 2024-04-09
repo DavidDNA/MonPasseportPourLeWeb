@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+    db:
+        image: mysql:8
+        volumes:
+            - ./docker/volumes/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
+    php:
+        build: docker/php8-fpm
+        ports:
+            - 9000:9000
+        links:
+            - db:mysql
+        volumes:
+            - ./app/:/var/www/symfony
+            # logs
+            - ./docker/volumes/logs/symfony/:/var/www/symfony/var/log
+            # dependencies & cache
+            - /var/www/symfony/node_modules
+            - /var/www/symfony/vendor
+            - /var/www/symfony/var/cache
+            - /var/www/symfony/var/log
+    nginx:
+        build: docker/nginx
+        ports:
+            - 80:80
+        volumes:
+            - ./app/:/var/www/symfony
+            - ./docker/volumes/logs/nginx/:/var/log/nginx
+            # dependencies & cache
+            - /var/www/symfony/node_modules
+            - /var/www/symfony/vendor
+            - /var/www/symfony/var/cache
+            - /var/www/symfony/var/log
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8080:80"
+        links:
+            - db
